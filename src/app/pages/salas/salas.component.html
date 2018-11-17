@@ -1,0 +1,53 @@
+<app-header></app-header>
+<app-sala-modal></app-sala-modal>
+
+<section class="content">
+  <header class="content__title">
+    <h1>Salas</h1>
+    <div class="actions">
+      <button class='btn btn-add' (click)="showModal()">
+        <i class="actions__item zmdi zmdi-plus"></i>
+        <span>Adicionar Sala</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="data-table__header">
+        <div class="form-group data-table__filter">
+          <input placeholder="Filter all columns" class="form-control">
+          <i class="form-group__bar"></i>
+        </div>
+      </div>
+      <div class="table-responsive" *ngIf="isLoaded; else notLoaded">
+        <table class="table table-striped mb-0">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th class="text-right">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of rooms">
+              <td>{{room.nome}}</td>
+              <td class="text-right">
+                <div dropdown>
+                  <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
+                  <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                    <span class="dropdown-item" (click)="showModal(room)">Editar</span>
+                    <span class="dropdown-item">Excluir</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #notLoaded>
+        <p>Loading...</p>
+      </ng-template>
+    </div>
+  </div>
+
+</section>

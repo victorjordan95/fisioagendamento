@@ -1,0 +1,31 @@
+<app-layout></app-layout>
+<app-criar-evento (modalAgendamento)='updateSchedules($event)' [events]="calendarOptions.events"></app-criar-evento>
+<section class="content">
+  <header class="content__title">
+    <h1>Agendamento</h1>
+    <div class="actions">
+      <select class="form-control" [(ngModel)]="selectedRoomId" (ngModelChange)="updateRoom($event)" placeholder="Selecione uma sala">
+        <option *ngFor="let room of rooms" [ngValue]="room.id">
+          {{room.nome}}
+        </option>
+      </select>
+      <button class='btn btn-add' (click)="showModal()">
+        <i class="actions__item zmdi zmdi-plus"></i>
+        <span>Adicionar Evento</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="card" style="height: 600px" *ngIf="calendarIsLoaded; else notLoaded">
+
+    <div class="card-body">
+
+      <div class="data-table__header">
+      </div>
+      <angular2-fullcalendar [options]="calendarOptions"></angular2-fullcalendar>
+    </div>
+  </div>
+  <ng-template #notLoaded>
+    <p>Loading...</p>
+  </ng-template>
+</section>

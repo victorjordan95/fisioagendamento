@@ -1,0 +1,9 @@
+.flex-row {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+
+    .form-group {
+        width: 45%;
+    }
+}

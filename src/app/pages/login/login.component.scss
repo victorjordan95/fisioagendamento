@@ -1,0 +1,33 @@
+.login {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  height: 100vh;
+
+  .login-left {
+    margin: 24px;
+    width: 25%;
+    transform: translateX(50%);
+
+    form {
+      height: 100%;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+    }
+
+    .input-group {
+      border: transparent;
+      box-shadow: 0 0 2px 0px #bfbfbf;
+      height: 40px;
+      padding: 4px;
+    }
+  }
+
+  .login-right {
+    height: 100%;
+    width: 45%;
+    background-color: black;
+  }
+}
