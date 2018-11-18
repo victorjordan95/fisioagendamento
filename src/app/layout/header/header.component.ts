@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { SharedService } from './../../shared/services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -6,7 +8,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    providers: [SharedService],
+    providers: [SharedService, AngularFireAuth],
     animations: [
         trigger('toggleHeight', [
             state('inactive', style({
@@ -27,10 +29,6 @@ export class HeaderComponent implements OnInit {
     tasksData: Array<any>;
     maThemeModel: string;
     sidebarVisible = false;
-
-    searchActive: boolean = false;
-    searchValue: string = '';
-    searchFocused: boolean = false;
 
     itemsMenu = [
         { link: 'home', icon: 'zmdi-home', label: 'Início' },
@@ -53,7 +51,7 @@ export class HeaderComponent implements OnInit {
         this.sharedService.setTheme(this.maThemeModel)
     }
 
-    constructor(private sharedService: SharedService) {
+    constructor(private sharedService: SharedService, private afAuth: AngularFireAuth, private router: Router) {
         sharedService.maThemeSubject.subscribe((value) => {
             this.maThemeModel = value;
         });
@@ -126,13 +124,8 @@ export class HeaderComponent implements OnInit {
         document.getElementById('js-menu').click();
     }
 
-    closeSearch() {
-        this.searchActive = false; // Close the search block
-        this.searchValue = null; // Empty the search field
-        this.searchFocused = false;
-    }
-
     logout() {
-
+        this.router.navigate(['']);
+        this.afAuth.auth.signOut();
     }
 }
