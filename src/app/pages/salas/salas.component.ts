@@ -19,7 +19,11 @@ export class SalasComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getRooms();
+        this.afAuth.authState.subscribe(user => {
+            if (user) {
+                this.getRooms();
+            }
+        });
     }
 
     showModal(e?) {

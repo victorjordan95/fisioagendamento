@@ -60,13 +60,12 @@ export class AgendamentoComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.afAuth.authState.subscribe(user => {
-        //     if (user) {
-        //         this.userId = user.uid;
-        //         this.getRooms();
-        //     }
-        // });
-        this.getRooms();
+        this.afAuth.authState.subscribe(user => {
+            if (user) {
+                this.userId = user.uid;
+                this.getRooms();
+            }
+        });
     }
 
     showModal(event?) {
