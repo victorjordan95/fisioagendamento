@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" (click)="createModal.hide()">&times;</button>
-                <h4 class="modal-title">Adicionar evento à agenda</h4>
+                <h4 class="modal-title">{{agendamento.title ? 'Agendamento de ' + agendamento.title : 'Criar agendamento'}}</h4>
             </div>
 
             <form #f="ngForm" (ngSubmit)="onSubmit(f)">
@@ -16,49 +16,32 @@
                     <div class="form-group">
                         <label>Nome Evento</label>
                         <input type="text" class="form-control" placeholder="Nome do Evento" [(ngModel)]="agendamento.title"
-                            name="title" required>
+                            name="title" required [disabled]="isViewMode">
                     </div>
 
                     <div class="flex-row">
                         <div class="form-group">
                             <label>Data Início</label>
                             <input type="date" class="form-control" placeholder="Data de início" [(ngModel)]="agendamento.startDate"
-                                name="startDate" required>
+                                name="startDate" required [disabled]="isViewMode">
                         </div>
                         <div class="form-group">
                             <label>Hora Início</label>
                             <input type="time" class="form-control" placeholder="Hora de início" [(ngModel)]="agendamento.startHour"
-                                name="startHour" required>
+                                name="startHour" required [disabled]="isViewMode">
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <input type="checkbox" class="form-check-input" 
-                            [ngModel]="allDayAgendamento" name="allDay" [checked]="allDayAgendamento" 
-                            (ngModelChange)="changePeriod($event)" id="allDay"
-                        >
-                        <label class="form-check-label" for="allDay">Adicionar horário término do agendamento? 
-                            <b>{{allDayAgendamento ? 'Sim' : 'Não'}}</b>
-                        </label>
-                    </div>
-
-                    <div class="flex-row">
-                        <div class="form-group" *ngIf="allDayAgendamento">
-                            <label>Data término</label>
-                            <input type="date" class="form-control" placeholder="Data de término" [(ngModel)]="agendamento.endDate"
-                                name="endDate">
-                        </div>
-                        <div class="form-group" *ngIf="allDayAgendamento">
+                        <div class="form-group">
                             <label>Hora término</label>
                             <input type="time" class="form-control" placeholder="Hora de término" [(ngModel)]="agendamento.endHour"
-                                name="endHour">
+                                name="endHour" [disabled]="isViewMode">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <input type="checkbox" class="form-check-input" 
                             [(ngModel)]="agendamento.repeatEvent" name="repeatEvent" [checked]="agendamento.repeatEvent" 
-                            (ngModelChange)="changeRepeatEvent($event)" id="repeatEvent"
+                            (ngModelChange)="changeRepeatEvent($event)" id="repeatEvent" [disabled]="isViewMode"
                         >
                         <label class="form-check-label" for="repeatEvent">
                             Repetir agendamento? <b>{{agendamento.repeatEvent ? 'Sim' : 'Não'}}</b>
@@ -67,7 +50,7 @@
 
                     <div class="form-group" *ngIf="agendamento.repeatEvent">
                         <label for="repeticaoDia">Repetir agendamento nos dias:</label>
-                        <select multiple id="repeticaoDia" class="form-control" [(ngModel)]="agendamento.dow" name="dow">
+                        <select multiple id="repeticaoDia" class="form-control" [(ngModel)]="agendamento.dow" name="dow" [disabled]="isViewMode">
                             <option *ngFor="let dia of dias" [ngValue]="dia.id">
                                 {{dia.label}}
                             </option>
@@ -76,9 +59,18 @@
 
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" (click)="createModal.hide()">Close</button>
-                    <button type="submit" class="btn btn-success" [disabled]="!f.valid">Submit</button>
+                <div class="modal-footer" *ngIf="!isViewMode">
+                    <div style="display: flex; flex-flow: row wrap; justify-content: space-between; width: 100%;">
+                        <button type="button" class="btn btn-success" (click)="enableEdit()" *ngIf="!isNew">Excluir</button>
+
+                        <div>
+                            <button type="button" style="margin-right: 8px" class="btn" (click)="createModal.hide()">Cancelar</button>
+                            <button type="submit" class="btn btn-success" [disabled]="!f.valid">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" *ngIf="isViewMode">
+                    <button type="button" class="btn btn-success" (click)="enableEdit()">Editar</button>
                 </div>
 
             </form>

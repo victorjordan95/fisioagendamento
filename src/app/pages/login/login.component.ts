@@ -24,9 +24,7 @@ export class LoginComponent implements OnInit {
             return;
         }
         this.afAuth.auth.signInWithEmailAndPassword(f.controls.email.value, f.controls.senha.value)
-            .then(ok => {
-                this.router.navigate(['/agendamento']);
-            })
+            .then(ok => this.router.navigate(['/agendamento']))
             .catch(error => {
                 if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-email') {
                     this.toastr.error('Usuário ou senha inválidos', 'Erro ao acessar!');

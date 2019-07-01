@@ -4,6 +4,8 @@
     flex-flow: row wrap;
 
     .form-group {
-        width: 45%;
+        @media screen and (min-width: 768px) {
+            width: 30%;
+        }
     }
 }

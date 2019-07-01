@@ -18,7 +18,9 @@ export class CriarEventoComponent implements OnInit {
     @Output() modalAgendamento = new EventEmitter();
     @Input() events;
 
-    public allDayAgendamento = false;
+    public isViewMode: boolean;
+    public isNew: boolean;
+
     public agendamento = new Agendamento;
     public dias = [
         { id: 0, label: 'Domingo' },
@@ -29,7 +31,8 @@ export class CriarEventoComponent implements OnInit {
         { id: 5, label: 'Sexta-feira' },
         { id: 6, label: 'Sábado' },
     ];
-    private userId;
+
+    private userId: string;
     private canSave = true;
 
     constructor(private angularFire: AngularFireDatabase, private toastr: ToastrService) {
@@ -41,15 +44,19 @@ export class CriarEventoComponent implements OnInit {
     showModal(userId, event?): void {
         this.userId = userId;
         if (event) {
+            this.isNew = false;
             this.agendamento = event[0];
             event[0].end === undefined ? this.agendamento.end = event.start : this.agendamento.end = event[0].end;
+            this.isViewMode = true;
         } else {
+            this.isNew = true;
             this.agendamento = new Agendamento;
             this.agendamento.allDay = true;
             this.agendamento.repeatEvent = false;
             const x = new Date();
             this.agendamento.id = `${x.getDate()}${x.getMonth() + 1}${x.getUTCFullYear()}` +
-            `${x.getHours()}${x.getMinutes()}${x.getSeconds()}${x.getMilliseconds()}`;
+                `${x.getHours()}${x.getMinutes()}${x.getSeconds()}${x.getMilliseconds()}`;
+            this.isViewMode = false;
         }
         if (this.agendamento.dow) {
             const date = new Date();
@@ -63,27 +70,16 @@ export class CriarEventoComponent implements OnInit {
         this.createModal.hide();
     }
 
-    changePeriod(e) {
-        this.agendamento.allDay = !e;
-        this.allDayAgendamento = e;
-
-    }
-
     changeRepeatEvent(e) {
         this.agendamento.repeatEvent = e;
     }
 
     onSubmit(form: NgForm) {
-        form.value.allDay = false;
         form.value.repeatEvent = this.agendamento.repeatEvent;
         form.value.start = `${this.agendamento.startDate}T${this.agendamento.startHour}`;
-        form.value.endDate ? form.value.end = `${this.agendamento.endDate}T${this.agendamento.endHour}` : form.value.end = null;
-
-        if (this.agendamento.allDay) {
-            form.value.endHour = '23:59';
-            form.value.endDate = form.value.startDate;
-            form.value.end = `${this.agendamento.startDate}T${form.value.endHour}`;
-        }
+        form.value.end = `${this.agendamento.startDate}T${this.agendamento.endHour}`;
+        form.value.endDate = form.value.startDate;
+        form.value.allDay = false;
 
         if (this.agendamento.repeatEvent) {
             form.value.start = this.agendamento.startHour;
@@ -93,16 +89,17 @@ export class CriarEventoComponent implements OnInit {
         this._checkDateAndSave(form.value);
     }
 
-    _checkDateAndSave(event) {
+    _checkDateAndSave(event: Agendamento) {
         this.canSave = true;
-        const currentDay = this.events.filter(el => el.startDate === event.startDate);
+        const currentDay = this.events.filter((el: Agendamento) => el.startDate === event.startDate);
 
         if (!currentDay.length) {
             this.canSave = true;
         } else {
-            currentDay.forEach(el => {
+            currentDay.forEach((el: Agendamento) => {
                 if ((event.startHour >= el.startHour && event.endHour >= el.startHour) && (event.startHour >= el.endHour) ||
-                    (event.startHour <= el.startHour && event.endHour <= el.startHour) && (event.startHour <= el.endHour)) {
+                    (event.startHour <= el.startHour && event.endHour <= el.startHour) && (event.startHour <= el.endHour) ||
+                    el.id === event.id) {
                     return;
                 } else {
                     this.canSave = false;
@@ -111,15 +108,20 @@ export class CriarEventoComponent implements OnInit {
         }
 
         if (this.canSave) {
-            this.angularFire.list(`rooms/${this.userId}/agenda`).set(`${this.agendamento.id}`, event).then((t: any) => {
-                this.modalAgendamento.emit(event);
-                this.createModal.hide();
-                this.allDayAgendamento = false;
-            });
+            this.angularFire
+                .list(`${this.userId}/agenda`).set(`${this.agendamento.id}`, event)
+                .then((t: any) => {
+                    this.modalAgendamento.emit(event);
+                    this.createModal.hide();
+                });
         } else {
             this.toastr.error(`Ops! Aparentemente já existe um evento neste horário!`, 'Conflito de Horário!');
         }
 
+    }
+
+    enableEdit() {
+        this.isViewMode = false;
     }
 
 }

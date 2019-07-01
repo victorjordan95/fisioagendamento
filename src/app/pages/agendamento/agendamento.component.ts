@@ -16,16 +16,14 @@ export class AgendamentoComponent implements OnInit {
     @ViewChild(CriarEventoComponent) modalComponent: CriarEventoComponent;
 
     public calendarIsLoaded = false;
-    public userId;
-    public rooms;
-    public selectedRoom;
-    public selectedRoomId;
+    public userId: string;
 
-    public user: String;
+    public user: string;
     public calendarOptions = {
         height: 'parent',
         fixedWeekCount: false,
         defaultDate: new Date(),
+        defaultView: window.innerWidth > 768 ? 'basicDay' : 'agendaWeek',
         editable: true,
         locale: 'pt-BR',
         header: {
@@ -51,9 +49,9 @@ export class AgendamentoComponent implements OnInit {
         dayClick: function(date, jsEvent, view) {
             alert('Clicked on: ' + date.format());
         },
-        timeFormat: 'H(:mm)',
+        timeFormat: 'HH:mm',
         eventOverlap: false,
-        allDaySlot: false
+        allDaySlot: true
     };
 
     constructor(private angularFire: AngularFireDatabase, private afAuth: AngularFireAuth, private toastr: ToastrService) {
@@ -63,45 +61,29 @@ export class AgendamentoComponent implements OnInit {
         this.afAuth.authState.subscribe(user => {
             if (user) {
                 this.userId = user.uid;
-                this.getRooms();
+                this.getEvents();
             }
         });
     }
 
     showModal(event?) {
-        this.modalComponent.showModal(this.selectedRoomId, event);
+        this.modalComponent.showModal(this.userId, event);
     }
 
-    getEvents(id) {
+    getEvents() {
         this.calendarIsLoaded = false;
-        this.angularFire.list(`rooms/${id}/agenda`).valueChanges().subscribe(
+        this.angularFire.list(`${this.userId}/agenda`).valueChanges().subscribe(
             events => {
-                let teste = [];
-                teste = events;
-                this.calendarOptions.events = teste;
+                const eventos = events;
+                this.calendarOptions.events = eventos;
                 this.calendarIsLoaded = true;
-            }
-        );
-    }
-
-    getRooms() {
-        this.angularFire.list(`rooms`).valueChanges().subscribe(
-            data => {
-                this.rooms = data;
-                this.selectedRoom = this.rooms[0];
-                this.selectedRoomId = this.selectedRoom.id;
-                this.getEvents(this.selectedRoom.id);
             }
         );
     }
 
     updateSchedules(e) {
         this.toastr.success(`Evento "${e.title}" foi cadastrado com sucesso `, 'Sucesso!');
-    }
-
-    updateRoom(e) {
-        this.selectedRoomId = e;
-        this.getEvents(e);
+        this.getEvents();
     }
 
 }

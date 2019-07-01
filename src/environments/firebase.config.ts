@@ -1,8 +1,9 @@
 export const FirebaseConfig = {
-    apiKey: "AIzaSyD-34dEpJRHsfsGXLBkwGBwo-hpG8X8vdA",
-    authDomain: "fitmeetings.firebaseapp.com",
-    databaseURL: "https://fitmeetings.firebaseio.com",
-    projectId: "fitmeetings",
-    storageBucket: "fitmeetings.appspot.com",
-    messagingSenderId: "269170060142"
+    apiKey: 'AIzaSyDUyxcmX5PgJbrHIgkw9cxGGzrkTWsvU1E',
+    authDomain: 'fisioagendamento.firebaseapp.com',
+    databaseURL: 'https://fisioagendamento.firebaseio.com',
+    projectId: 'fisioagendamento',
+    storageBucket: '',
+    messagingSenderId: '679745762040',
+    appId: '1:679745762040:web:eade1c1bd68d7f79'
 };
