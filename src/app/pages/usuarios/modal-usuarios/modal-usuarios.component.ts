@@ -17,7 +17,7 @@ export class ModalUsuariosComponent implements OnInit {
     @ViewChild('createModal') createModal: ModalDirective;
     public usuario = new Usuario;
     public isEditing = false;
-    private DEFAULT_PASSWORD = 'ccbnovousuario';
+    private DEFAULT_PASSWORD = 'novofisio';
 
     constructor(private afAuth: AngularFireAuth, private toastr: ToastrService, private angularFire: AngularFireDatabase) { }
 

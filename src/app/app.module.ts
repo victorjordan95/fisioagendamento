@@ -34,6 +34,8 @@ import { SalaModalComponent } from './pages/salas/sala-modal/sala-modal.componen
 import { SalasComponent } from './pages/salas/salas.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ModalUsuariosComponent } from './pages/usuarios/modal-usuarios/modal-usuarios.component';
+import { ConsultoriosComponent } from './pages/consultorios/consultorios.component';
+import { ModalConsultoriosComponent } from './pages/consultorios/modal-consultorios/modal-consultorios.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -53,7 +55,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SalasComponent,
     SalaModalComponent,
     UsuariosComponent,
-    ModalUsuariosComponent
+    ModalUsuariosComponent,
+    ConsultoriosComponent,
+    ModalConsultoriosComponent
   ],
   imports: [
     BrowserModule,
