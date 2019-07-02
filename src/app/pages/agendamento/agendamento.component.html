@@ -4,9 +4,15 @@
     <header class="content__title">
         <h1>Agendamento</h1>
         <div class="actions">
+            <select class="form-control" [(ngModel)]="selectedConsultorioId" (ngModelChange)="updateConsultorio($event)"
+                placeholder="Selecione uma sala">
+                <option *ngFor="let consultorio of consultorios" [ngValue]="consultorio.id">
+                    {{consultorio.nome}}
+                </option>
+            </select>
             <button class='btn btn-add' (click)="showModal()">
                 <i class="actions__item zmdi zmdi-plus"></i>
-                <span>Agendamento</span>
+                <span>Adicionar Evento</span>
             </button>
         </div>
     </header>

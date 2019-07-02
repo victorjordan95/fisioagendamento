@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { CriarEventoComponent } from './criar-evento/criar-evento.component';
+import { Consultorio } from '../consultorios/Consultorio';
 
 @Component({
     selector: 'app-agendamento',
@@ -17,6 +18,10 @@ export class AgendamentoComponent implements OnInit {
 
     public calendarIsLoaded = false;
     public userId: string;
+
+    public consultorios: Consultorio[];
+    public selectedConsultorio: any;
+    public selectedConsultorioId: string;
 
     public user: string;
     public calendarOptions: any = {
@@ -32,7 +37,7 @@ export class AgendamentoComponent implements OnInit {
             const clickedEvent = this.calendarOptions.events.filter(element => element.id === event.id);
             this.showModal(clickedEvent);
         },
-        dayClick: function(date, jsEvent, view) {
+        dayClick: function (date, jsEvent, view) {
             alert('Clicked on: ' + date.format());
         },
         timeFormat: 'HH:mm',
@@ -77,18 +82,30 @@ export class AgendamentoComponent implements OnInit {
         this.afAuth.authState.subscribe(user => {
             if (user) {
                 this.userId = user.uid;
-                this.getEvents();
+                this.getConsultorios();
             }
         });
     }
 
-    showModal(event?) {
-        this.modalComponent.showModal(this.userId, event);
+    showModal(event?: any) {
+        this.modalComponent.showModal(this.selectedConsultorioId, event);
     }
 
-    getEvents() {
+
+    updateConsultorio(e: any) {
+        this.selectedConsultorioId = e;
+        this.getEvents(e);
+    }
+
+    updateSchedules(e: any) {
+        this.toastr.success(`Evento "${e.title}" foi cadastrado com sucesso `, 'Sucesso!');
+        this.getEvents(this.selectedConsultorio.id);
+    }
+
+
+    getEvents(consultorio: string) {
         this.calendarIsLoaded = false;
-        this.angularFire.list(`${this.userId}/agenda`).valueChanges().subscribe(
+        this.angularFire.list(`consultorios/${consultorio}/agenda`).valueChanges().subscribe(
             events => {
                 const eventos = events;
                 this.calendarOptions.events = eventos;
@@ -97,9 +114,14 @@ export class AgendamentoComponent implements OnInit {
         );
     }
 
-    updateSchedules(e) {
-        this.toastr.success(`Evento "${e.title}" foi cadastrado com sucesso `, 'Sucesso!');
-        this.getEvents();
+    getConsultorios() {
+        this.angularFire.list(`consultorios`).valueChanges().subscribe(
+            (consultorios: Consultorio[]) => {
+                this.consultorios = consultorios;
+                this.selectedConsultorio = this.consultorios[0];
+                this.selectedConsultorioId = this.selectedConsultorio.id;
+                this.getEvents(this.selectedConsultorio.id);
+            }
+        );
     }
-
 }

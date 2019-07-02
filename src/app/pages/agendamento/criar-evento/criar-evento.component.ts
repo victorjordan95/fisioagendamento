@@ -21,7 +21,7 @@ export class CriarEventoComponent implements OnInit {
     public isViewMode: boolean;
     public isNew: boolean;
 
-    public agendamento = new Agendamento;
+    public agendamento: Agendamento;
     public dias = [
         { id: 0, label: 'Domingo' },
         { id: 1, label: 'Segunda-feira' },
@@ -32,17 +32,19 @@ export class CriarEventoComponent implements OnInit {
         { id: 6, label: 'Sábado' },
     ];
 
-    private userId: string;
-    private canSave = true;
+    private consultorioId: string;
+    private canSave: boolean;
 
     constructor(private angularFire: AngularFireDatabase, private toastr: ToastrService) {
+        this.canSave = true;
+        this.agendamento = new Agendamento;
     }
 
     ngOnInit() {
     }
 
-    showModal(userId, event?): void {
-        this.userId = userId;
+    showModal(consultorioId: string, event?: any): void {
+        this.consultorioId = consultorioId;
         if (event) {
             this.isNew = false;
             this.agendamento = event[0];
@@ -50,7 +52,6 @@ export class CriarEventoComponent implements OnInit {
             this.isViewMode = true;
         } else {
             this.isNew = true;
-            this.agendamento = new Agendamento;
             this.agendamento.allDay = true;
             this.agendamento.repeatEvent = false;
             const x = new Date();
@@ -109,8 +110,9 @@ export class CriarEventoComponent implements OnInit {
         }
 
         if (this.canSave) {
+            debugger;
             this.angularFire
-                .list(`${this.userId}/agenda`).set(`${this.agendamento.id}`, event)
+                .list(`consultorios/${this.consultorioId}/agenda`).set(`${this.agendamento.id}`, event)
                 .then((t: any) => {
                     this.modalAgendamento.emit(event);
                     this.createModal.hide();

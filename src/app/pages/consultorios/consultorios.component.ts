@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Consultorio } from './Consultorio';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class ConsultoriosComponent implements OnInit {
 
   @ViewChild(ModalConsultoriosComponent) modalComponent: ModalConsultoriosComponent;
-    public consultorios;
+    public consultorios: Consultorio[];
     public isLoaded = true;
     public filter = '';
     public page = 1;
@@ -28,15 +29,15 @@ export class ConsultoriosComponent implements OnInit {
         this.getConsultorios();
     }
 
-    showModal(e?) {
+    showModal(e?: Consultorio) {
         this.modalComponent.showModal(e);
     }
 
     getConsultorios() {
         this.isLoaded = false;
         this.angularFire.list(`consultorios`).valueChanges().subscribe(
-            data => {
-                this.consultorios = data;
+            (consultorios: Consultorio[]) => {
+                this.consultorios = consultorios;
                 this.isLoaded = true;
             }
         );

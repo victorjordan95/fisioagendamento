@@ -18,18 +18,19 @@ export class ModalConsultoriosComponent implements OnInit {
     public consultorio: Consultorio;
     public isEditing = false;
 
-    constructor(private toastr: ToastrService, private angularFire: AngularFireDatabase) { }
+    constructor(private toastr: ToastrService, private angularFire: AngularFireDatabase) {
+        this.consultorio = new Consultorio;
+    }
 
     ngOnInit() {
     }
 
-    showModal(e?) {
+    showModal(e?: Consultorio) {
         if (e) {
             this.consultorio = e;
             this.isEditing = true;
         } else {
             this.isEditing = false;
-            this.consultorio = new Consultorio;
             const x = new Date();
             this.consultorio.id = `${x.getDate()}${x.getMonth() + 1}${x.getUTCFullYear()}` +
             `${x.getHours()}${x.getMinutes()}${x.getSeconds()}${x.getMilliseconds()}`;

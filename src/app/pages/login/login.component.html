@@ -4,15 +4,15 @@
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
             <div class="form-group">
                 <label for="exampleInputEmail1">E-mail</label>
-                <input type="email" class="input-group" required autofocus autocomplete="email" ngModel name="email"
+                <input type="email" class="input-group" required autofocus ngModel name="email"
                     placeholder="Insira seu e-mail">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small> -->
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Senha</label>
                 <input type="password" class="input-group" name="senha" placeholder="Insira sua senha" required ngModel
-                    autocomplete="current-password">
+                    >
             </div>
             <button type="submit" class="btn btn-success" [disabled]="f.form.invalid">Acessar</button>
         </form>

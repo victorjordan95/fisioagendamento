@@ -4,11 +4,11 @@
 
 <section class="content">
     <header class="content__title">
-        <h1>Usuários</h1>
+        <h1>Consultórios</h1>
         <div class="actions">
             <button class='btn btn-add' (click)="showModal()">
                 <i class="actions__item zmdi zmdi-plus"></i>
-                <span>Adicionar usuário</span>
+                <span>Adicionar consultório</span>
             </button>
         </div>
     </header>
@@ -29,32 +29,28 @@
                             <th>Ação</th>
                             <th (click)="sort('nome')" class="pointer">
                                 Nome
-                                <i class="zmdi" *ngIf="key =='nome'"
-                                    [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
+                                <i class="zmdi" *ngIf="key =='nome'" [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
                             </th>
-                            <th>E-mail</th>
-                            <th (click)="sort('role')" class="pointer">
-                                Tipo usuário
-                                <i class="zmdi" *ngIf="key =='role'"
-                                    [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
+                            <th (click)="sort('local')" class="pointer">
+                                Local
+                                <i class="zmdi" *ngIf="key =='local'" [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let usuario of usuarios | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
+                            *ngFor="let consultorio of consultorios | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
                             <td>
                                 <div dropdown>
                                     <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
                                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-                                        <span class="dropdown-item" (click)="showModal(usuario)">Editar</span>
+                                        <span class="dropdown-item" (click)="showModal(consultorio)">Editar</span>
                                         <!-- <span class="dropdown-item">Excluir</span> -->
                                     </div>
                                 </div>
                             </td>
-                            <td>{{usuario.nome}}</td>
-                            <td>{{usuario.email}}</td>
-                            <td>{{usuario.role}}</td>
+                            <td>{{consultorio.nome}}</td>
+                            <td>{{consultorio.local}}</td>
                         </tr>
                     </tbody>
                 </table>
