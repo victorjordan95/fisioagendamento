@@ -1,151 +1,162 @@
 <header class="header">
-  <app-navigation-trigger></app-navigation-trigger>
+    <app-navigation-trigger></app-navigation-trigger>
 
-  <div class="header__logo">
-    <h1><a [routerLink]="['']">Agenda Online</a></h1>
-  </div>
+    <div class="header__logo">
+        <h1><a [routerLink]="['']">Agenda Online</a></h1>
+    </div>
 
-  <app-search #search class="toggled" [class.toggled]="search.searchActive"></app-search>
+    <app-search #search class="toggled" [class.toggled]="search.searchActive"></app-search>
 
-  <ul class="top-nav">
-    <li class="d-xl-none"><a (click)="search.searchActive = true"><i class="zmdi zmdi-search"></i></a></li>
+    <ul class="top-nav">
+        <li class="d-xl-none"><a (click)="search.searchActive = true"><i class="zmdi zmdi-search"></i></a></li>
 
-    <li dropdown>
-      <a dropdownToggle><i class="zmdi zmdi-email"></i></a>
-      <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
-        <div class="listview listview--hover">
-          <div class="listview__header">
-            Messages
+        <li dropdown>
+            <a dropdownToggle><i class="zmdi zmdi-email"></i></a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+                <div class="listview listview--hover">
+                    <div class="listview__header">
+                        Messages
 
-            <div class="actions">
-              <a href="messages.html" class="actions__item zmdi zmdi-plus"></a>
+                        <div class="actions">
+                            <a href="messages.html" class="actions__item zmdi zmdi-plus"></a>
+                        </div>
+                    </div>
+
+                    <a *ngFor="let message of messagesData" href="" class="listview__item">
+                        <img [src]="message.image" class="listview__img" alt="">
+
+                        <div class="listview__content">
+                            <h3 class="listview__heading">
+                                {{ message.name }}
+                                <small>{{ message.date }}</small>
+                            </h3>
+                            <p>{{ message.message }}</p>
+                        </div>
+                    </a>
+
+                    <a href="" class="view-more">See All Messages</a>
+                </div>
             </div>
-          </div>
+        </li>
 
-          <a *ngFor="let message of messagesData" href="" class="listview__item">
-            <img [src]="message.image" class="listview__img" alt="">
+        <li dropdown>
+            <a dropdownToggle class="top-nav__notify"><i class="zmdi zmdi-notifications"></i></a>
 
-            <div class="listview__content">
-              <h3 class="listview__heading">
-                {{ message.name }}
-                <small>{{ message.date }}</small>
-              </h3>
-              <p>{{ message.message }}</p>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+                <div class="listview listview--hover">
+                    <div class="listview__header">
+                        Notifications
+
+                        <div class="actions">
+                            <a href="" class="actions__item zmdi zmdi-check-all"
+                                data-ma-action="notifications-clear"></a>
+                        </div>
+                    </div>
+
+                    <a *ngFor="let message of messagesData" href="" class="listview__item">
+                        <img [src]="message.image" class="listview__img" alt="">
+
+                        <div class="listview__content">
+                            <h3 class="listview__heading">{{ message.name }}</h3>
+                            <p>{{ message.message }}</p>
+                        </div>
+                    </a>
+
+                    <a href="" class="view-more">See All Notifications</a>
+                </div>
             </div>
-          </a>
+        </li>
 
-          <a href="" class="view-more">See All Messages</a>
-        </div>
-      </div>
-    </li>
+        <li dropdown class="d-none d-sm-inline-block">
+            <a dropdownToggle><i class="zmdi zmdi-apps"></i></a>
 
-    <li dropdown>
-      <a dropdownToggle class="top-nav__notify"><i class="zmdi zmdi-notifications"></i></a>
-
-      <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
-        <div class="listview listview--hover">
-          <div class="listview__header">
-            Notifications
-
-            <div class="actions">
-              <a href="" class="actions__item zmdi zmdi-check-all" data-ma-action="notifications-clear"></a>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+                <div class="row app-shortcuts">
+                    <a class="col-4 app-shortcuts__item" href="">
+                        <i class="zmdi zmdi-calendar bg-red"></i>
+                        <small class="">Calendar</small>
+                    </a>
+                    <a class="col-4 app-shortcuts__item" href="">
+                        <i class="zmdi zmdi-file-text bg-blue"></i>
+                        <small class="">Files</small>
+                    </a>
+                    <a class="col-4 app-shortcuts__item" href="">
+                        <i class="zmdi zmdi-email bg-teal"></i>
+                        <small class="">Email</small>
+                    </a>
+                    <a class="col-4 app-shortcuts__item" href="">
+                        <i class="zmdi zmdi-trending-up bg-blue-grey"></i>
+                        <small class="">Reports</small>
+                    </a>
+                    <a class="col-4 app-shortcuts__item" href="">
+                        <i class="zmdi zmdi-view-headline bg-orange"></i>
+                        <small class="">News</small>
+                    </a>
+                    <a class="col-4 app-shortcuts__item" href="">
+                        <i class="zmdi zmdi-image bg-light-green"></i>
+                        <small class="">Gallery</small>
+                    </a>
+                </div>
             </div>
-          </div>
+        </li>
 
-          <a *ngFor="let message of messagesData" href="" class="listview__item">
-            <img [src]="message.image" class="listview__img" alt="">
+        <li dropdown class="d-none d-sm-inline-block">
+            <a (click)="logout()"> <i class="zmdi zmdi-power"></i></a>
 
-            <div class="listview__content">
-              <h3 class="listview__heading">{{ message.name }}</h3>
-              <p>{{ message.message }}</p>
-            </div>
-          </a>
-
-          <a href="" class="view-more">See All Notifications</a>
-        </div>
-      </div>
-    </li>
-
-    <li dropdown class="d-none d-sm-inline-block">
-      <a dropdownToggle><i class="zmdi zmdi-apps"></i></a>
-
-      <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
-        <div class="row app-shortcuts">
-          <a class="col-4 app-shortcuts__item" href="">
-            <i class="zmdi zmdi-calendar bg-red"></i>
-            <small class="">Calendar</small>
-          </a>
-          <a class="col-4 app-shortcuts__item" href="">
-            <i class="zmdi zmdi-file-text bg-blue"></i>
-            <small class="">Files</small>
-          </a>
-          <a class="col-4 app-shortcuts__item" href="">
-            <i class="zmdi zmdi-email bg-teal"></i>
-            <small class="">Email</small>
-          </a>
-          <a class="col-4 app-shortcuts__item" href="">
-            <i class="zmdi zmdi-trending-up bg-blue-grey"></i>
-            <small class="">Reports</small>
-          </a>
-          <a class="col-4 app-shortcuts__item" href="">
-            <i class="zmdi zmdi-view-headline bg-orange"></i>
-            <small class="">News</small>
-          </a>
-          <a class="col-4 app-shortcuts__item" href="">
-            <i class="zmdi zmdi-image bg-light-green"></i>
-            <small class="">Gallery</small>
-          </a>
-        </div>
-      </div>
-    </li>
-
-    <li dropdown class="d-none d-sm-inline-block">
-      <a (click)="logout()"> <i class="zmdi zmdi-power"></i></a>
-
-    </li>
-  </ul>
+        </li>
+    </ul>
 
 </header>
 
 <!-- Navigation section -->
 
 <aside class="sidebar" [class.toggled]="sidebarVisible">
-  <perfect-scrollbar>
+    <perfect-scrollbar>
 
-    <div class="user" dropdown>
-      <div class="user__info" dropdownToggle>
-        <img class="user__img" src="./assets/demo/img/profile-pics/2.png" alt="">
-        <div>
-          <div class="user__name">Victor Jordan</div>
-          <div class="user__email">vjordan@fitec.org.br</div>
+        <div class="user" dropdown>
+            <div class="user__info" dropdownToggle>
+                <img class="user__img" src="./assets/demo/img/profile-pics/2.png" alt="">
+                <div>
+                    <div class="user__name">Victor Jordan</div>
+                    <div class="user__email">vjordan@fitec.org.br</div>
+                </div>
+            </div>
+
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="">View Profile</a>
+                <a class="dropdown-item" href="">Settings</a>
+                <a class="dropdown-item" href="">Logout</a>
+            </div>
         </div>
-      </div>
 
-      <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="">View Profile</a>
-        <a class="dropdown-item" href="">Settings</a>
-        <a class="dropdown-item" href="">Logout</a>
-      </div>
-    </div>
+        <ul class="navigation">
 
-    <ul class="navigation">
+            <li *ngFor="let item of itemsMenu" routerLinkActive="navigation__active" (click)="closeMenu()">
+                <a [routerLink]="['/', item.link]">
+                    <i [ngClass]="['zmdi', item.icon]"></i>
+                    {{item.label}}
+                </a>
+            </li>
 
-      <li *ngFor="let item of itemsMenu" routerLinkActive="navigation__active" (click)="closeMenu()">
-        <a [routerLink]="['/', item.link]">
-          <i [ngClass]="['zmdi', item.icon]"></i>
-          {{item.label}}
-        </a>
-      </li>
+            <li routerLinkActive="navigation__sub--active" class="navigation__sub">
+                <a (click)="toggleNavigationSub('Forms', $event)">
+                    <i class="zmdi zmdi-accounts-add"></i>
+                    Cadastros de Usuários
+                </a>
 
-      <li routerLinkActive="navigation__sub--active" class="navigation__sub">
-        <a (click)="toggleNavigationSub('Forms', $event)"><i class="zmdi zmdi-collection-text"></i> Forms</a>
-
-        <ul [@toggleHeight]="navigationSubState.Forms">
-          <li routerLinkActive="navigation__active"><a [routerLink]="['/form/form-elements']">Form Elements</a></li>
-          <li routerLinkActive="navigation__active"><a [routerLink]="['/form/form-components']">Form Components</a></li>
-          <li routerLinkActive="navigation__active"><a [routerLink]="['/form/form-validation']">Form Validation</a></li>
+                <ul [@toggleHeight]="navigationSubState.Forms">
+                    <li routerLinkActive="navigation__active">
+                        <a [routerLink]="['/cadastro-usuarios']">
+                            Usuários do Sistema
+                        </a>
+                    </li>
+                    <li routerLinkActive="navigation__active">
+                        <a [routerLink]="['/form/form-elements']">
+                            Pacientes
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
-  </perfect-scrollbar>
+    </perfect-scrollbar>
 </aside>

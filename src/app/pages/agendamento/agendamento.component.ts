@@ -19,27 +19,13 @@ export class AgendamentoComponent implements OnInit {
     public userId: string;
 
     public user: string;
-    public calendarOptions = {
+    public calendarOptions: any = {
         height: 'parent',
         fixedWeekCount: false,
         defaultDate: new Date(),
-        defaultView: window.innerWidth > 768 ? 'basicDay' : 'agendaWeek',
+        defaultView: window.innerWidth > 768 ? 'month' : 'list',
         editable: true,
         locale: 'pt-BR',
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay,list'
-        },
-        buttonText: {
-            prev: 'Anterior',
-            next: 'Próximo',
-            today: 'Hoje',
-            month: 'Mês',
-            week: 'Semana',
-            day: 'Dia',
-            list: 'Lista'
-        },
         eventLimit: true,
         events: [],
         eventClick: (event, jsEvent, view) => {
@@ -55,6 +41,36 @@ export class AgendamentoComponent implements OnInit {
     };
 
     constructor(private angularFire: AngularFireDatabase, private afAuth: AngularFireAuth, private toastr: ToastrService) {
+        if (window.innerWidth > 768) {
+            this.calendarOptions.header = {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month, agendaWeek, agendaDay, list'
+            };
+            this.calendarOptions.buttonText = {
+                prev: 'Anterior',
+                next: 'Próximo',
+                today: 'Hoje',
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                list: 'Lista'
+            };
+        } else {
+            this.calendarOptions.header = {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'listMonth, listWeek, list'
+            };
+            this.calendarOptions.buttonText = {
+                prev: 'Anterior',
+                next: 'Próximo',
+                today: 'Hoje',
+                listMonth: 'Mês',
+                listWeek: 'Semana',
+                list: 'Dia',
+            };
+        }
     }
 
     ngOnInit() {

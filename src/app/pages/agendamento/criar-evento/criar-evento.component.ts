@@ -84,6 +84,7 @@ export class CriarEventoComponent implements OnInit {
         if (this.agendamento.repeatEvent) {
             form.value.start = this.agendamento.startHour;
             form.value.end = this.agendamento.endHour;
+            form.value.startRecur = form.value.startDate;
         }
 
         this._checkDateAndSave(form.value);

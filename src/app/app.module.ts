@@ -9,6 +9,9 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { OrderModule } from 'ngx-order-pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { FirebaseConfig } from './../environments/firebase.config';
 import { AngularFireModule } from '@angular/fire';
@@ -29,6 +32,8 @@ import { CriarEventoComponent } from './pages/agendamento/criar-evento/criar-eve
 import { ToastrModule } from 'ngx-toastr';
 import { SalaModalComponent } from './pages/salas/sala-modal/sala-modal.component';
 import { SalasComponent } from './pages/salas/salas.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { ModalUsuariosComponent } from './pages/usuarios/modal-usuarios/modal-usuarios.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,7 +51,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CalendarComponent,
     CriarEventoComponent,
     SalasComponent,
-    SalaModalComponent
+    SalaModalComponent,
+    UsuariosComponent,
+    ModalUsuariosComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       tapToDismiss: true,
       closeButton: true
     }),
-    NgSelectizeModule
+    NgSelectizeModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
+    OrderModule
   ],
   providers: [
     {
