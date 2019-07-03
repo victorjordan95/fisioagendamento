@@ -1,0 +1,70 @@
+<div class="modal fade" bsModal #createModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="createModal.hide()">&times;</button>
+                <h4 class="modal-title">{{isEditing ? 'Edição' : 'Cadastro'}} de Paciente</h4>
+            </div>
+
+            <form #f="ngForm" autocomplete="off" (ngSubmit)="onSubmit(f)">
+
+
+                <div class="modal-body">
+                    <input autocomplete="false" type="hidden" name="id" [(ngModel)]="paciente.id">
+
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input autocomplete="false" type="text" class="form-control" placeholder="Nome do Paciente"
+                            [(ngModel)]="paciente.nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input autocomplete="false" type="email" class="form-control" placeholder="E-mail do Paciente"
+                            [(ngModel)]="paciente.email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>RG</label>
+                        <input autocomplete="false" type="text" class="form-control" placeholder="RG do Paciente"
+                            [(ngModel)]="paciente.rg" name="rg" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Endereço</label>
+                        <input autocomplete="false" type="text" class="form-control" placeholder="Endereço do Paciente"
+                            [(ngModel)]="paciente.endereco" name="endereco">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input autocomplete="false" type="tel" class="form-control" placeholder="Telefone do Paciente"
+                            [(ngModel)]="paciente.telefone" name="telefone">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Celular</label>
+                        <input autocomplete="false" type="tel" class="form-control" placeholder="Celular do Paciente"
+                            [(ngModel)]="paciente.celular" name="celular">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input autocomplete="false" type="date" class="form-control"
+                            placeholder="Data de Nascimento do Paciente" [(ngModel)]="paciente.dataNascimento"
+                            name="dataNascimento">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" (click)="createModal.hide()">Cancelar</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!f.valid">Salvar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
