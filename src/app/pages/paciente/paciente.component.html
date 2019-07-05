@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<section>
+    <header>
+        <img src="" alt="">
+        <h5>Nome do Paciente</h5>
+        <h6>Alguma outra informação</h6>
+    </header>
+</section>
+
+<section class="content">
+    <header class="content__title">
+        <h1>Pacientes</h1>
+        <div class="actions">
+            <button class='btn btn-add' (click)="showModal()">
+                <i class="actions__item zmdi zmdi-plus"></i>
+                <span>Adicionar paciente</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="card">
+        <div class="card-body">
+
+
+
+            <ng-template #notLoaded>
+                <p>Loading...</p>
+            </ng-template>
+        </div>
+    </div>
+
+</section>

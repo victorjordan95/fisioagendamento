@@ -29,8 +29,8 @@ export class ConsultoriosComponent implements OnInit {
         this.getConsultorios();
     }
 
-    showModal(e?: Consultorio) {
-        this.modalComponent.showModal(e);
+    showModal(conultorio?: Consultorio) {
+        this.modalComponent.showModal(conultorio);
     }
 
     getConsultorios() {

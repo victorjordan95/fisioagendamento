@@ -17,9 +17,8 @@ export class ModalPacientesComponent implements OnInit {
     @ViewChild('createModal') createModal: ModalDirective;
     public paciente: Paciente;
     public isEditing = false;
-    private DEFAULT_PASSWORD = 'novofisio';
 
-    constructor(private afAuth: AngularFireAuth, private toastr: ToastrService, private angularFire: AngularFireDatabase) {
+    constructor(private toastr: ToastrService, private angularFire: AngularFireDatabase) {
         this.paciente = new Paciente;
     }
 
