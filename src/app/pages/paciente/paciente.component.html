@@ -1,33 +1,102 @@
 <app-header></app-header>
 
-<section>
-    <header>
-        <img src="" alt="">
-        <h5>Nome do Paciente</h5>
-        <h6>Alguma outra informação</h6>
-    </header>
-</section>
-
-<section class="content">
+<section class="content" *ngIf="isLoaded">
     <header class="content__title">
-        <h1>Pacientes</h1>
+        <h1>{{paciente.nome}}</h1>
         <div class="actions">
             <button class='btn btn-add' (click)="showModal()">
-                <i class="actions__item zmdi zmdi-plus"></i>
-                <span>Adicionar paciente</span>
+                <i class="actions__item zmdi zmdi-pencil"></i>
+                <span>Adicionar anotação</span>
             </button>
         </div>
     </header>
 
-    <div class="card">
-        <div class="card-body">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Dados pessoais</h4>
+                    <h6 class="card-subtitle">Clique em ver mais para maiores detalhes</h6>
+                    <p class="card-text">
+                        <span class="d-block">RG: {{paciente.rg}}</span>
+                        <span class="d-block" *ngIf="paciente.telefone">Telefone: {{paciente.telefone}}</span>
+                        <span class="d-block" *ngIf="paciente.celular">Celular: {{paciente.dataNascimento}}</span>
+                    </p>
+                    <accordion class="accordion">
+                        <accordion-group heading="Ver mais dados">
+                            <span class="d-block">E-mail: {{paciente.email}}</span>
+                            <span class="d-block">RG: {{paciente.rg}}</span>
+                            <span class="d-block">Endereço: {{paciente.endereco}}</span>
+                            <span class="d-block">Aniversário: {{paciente.aniversario}}</span>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Histório de consultas</h4>
+                    <h6 class="card-subtitle">Últimas 5 consultas realizada</h6>
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Consulta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>02/06/2019</td>
+                                    <td>Fisioterapia</td>
+                                </tr>
+                                <tr>
+                                    <td>02/05/2019</td>
+                                    <td>Fisioterapia</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a class="card-link" href="#">Ver mais</a>
+                </div>
+            </div>
+        </div>
 
-
-            <ng-template #notLoaded>
-                <p>Loading...</p>
-            </ng-template>
+        <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Histório de Pagamento</h4>
+                    <h6 class="card-subtitle">Últimos 5 pagamentos</h6>
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Consulta</th>
+                                    <th>Data</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fisioterapia</td>
+                                    <td>02/06/2019</td>
+                                    <td>Pago</td>
+                                </tr>
+                                <tr>
+                                    <td>Fisioterapia</td>
+                                    <td>02/05/2019</td>
+                                    <td>Pago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a class="card-link" href="#">Another link</a>
+                </div>
+            </div>
         </div>
     </div>
 
 </section>
+

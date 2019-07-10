@@ -15,7 +15,7 @@ export class PacientesComponent implements OnInit {
 
     @ViewChild(ModalPacientesComponent) modalComponent: ModalPacientesComponent;
     public pacientes;
-    public isLoaded = true;
+    public isLoaded = false;
     public filter = '';
     public page = 1;
     public key = 'nome';

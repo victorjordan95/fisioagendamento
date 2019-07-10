@@ -67,11 +67,15 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{paciente.nome}}</td>
+                            <td>
+                                <a [routerLink]="[ '/paciente', paciente.id ]">
+                                {{paciente.nome}}
+                                </a>
+                            </td>
                             <td>{{paciente.email}}</td>
                             <td>{{paciente.telefone}}</td>
                             <td>{{paciente.celular}}</td>
-                            <td>{{paciente.dataNascimento}}</td>
+                            <td>{{paciente.dataNascimento | date:"dd/MM/yy"}}</td>
                         </tr>
                     </tbody>
                 </table>

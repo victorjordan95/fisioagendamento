@@ -405,7 +405,7 @@
 
     @include media-breakpoint-down(lg) {
         padding: 0 1.5rem;
-        position: absolute;
+        position: relative;
         left: 0;
         top: 0;
         height: 100%;

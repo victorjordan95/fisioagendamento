@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 import { FirebaseConfig } from './../environments/firebase.config';
 import { AngularFireModule } from '@angular/fire';
@@ -40,6 +41,7 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { ModalPacientesComponent } from './pages/pacientes/modal-pacientes/modal-pacientes.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
 import { ModalPacienteComponent } from './pages/paciente/modal-paciente/modal-paciente.component';
+import { LoaderComponent } from './layout/loader/loader.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -65,7 +67,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PacientesComponent,
     ModalPacientesComponent,
     PacienteComponent,
-    ModalPacienteComponent
+    ModalPacienteComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    AccordionModule.forRoot(),
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,

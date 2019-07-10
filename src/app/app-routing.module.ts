@@ -6,6 +6,7 @@ import { SalasComponent } from './pages/salas/salas.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ConsultoriosComponent } from './pages/consultorios/consultorios.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { PacienteComponent } from './pages/paciente/paciente.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'consultorios', component: ConsultoriosComponent},
   { path: 'usuarios', component: UsuariosComponent},
   { path: 'pacientes', component: PacientesComponent},
+  { path: 'paciente/:id', component: PacienteComponent}
 ];
 
 @NgModule({
