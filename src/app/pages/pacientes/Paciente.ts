@@ -1,10 +1,12 @@
 export class Paciente {
     id: any;
     nome: any;
-    email: String;
+    email: string;
     rg: any;
-    endereco?: String;
+    endereco?: string;
     telefone?: number;
     celular?: number;
     dataNascimento: Date;
+    profissao?: string;
+    fotoPerfil?: string;
 }

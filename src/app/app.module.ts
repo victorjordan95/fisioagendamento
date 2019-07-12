@@ -13,6 +13,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import {NgxMaskModule} from 'ngx-mask';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { FirebaseConfig } from './../environments/firebase.config';
 import { AngularFireModule } from '@angular/fire';
@@ -79,6 +82,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     AccordionModule.forRoot(),
+    NgxMaskModule.forRoot(),
+    TabsModule.forRoot(),
+    CollapseModule.forRoot(),
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,

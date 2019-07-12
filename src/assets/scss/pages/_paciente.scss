@@ -1,0 +1,21 @@
+.paciente {
+
+    .nav {
+        background-color: #fafafa !important;
+    }
+
+    .nav-tabs .nav-link.active {
+        background-color: #fafafa;
+    }
+    .nav-justified .nav-item {
+        background-color: #fafafa !important;
+    }
+
+    .card {
+        &-link {
+            display: block;
+            margin-top: 36px;
+            text-align: right;
+        }
+    }
+}
