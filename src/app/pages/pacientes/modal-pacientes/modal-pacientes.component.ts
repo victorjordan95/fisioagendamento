@@ -5,6 +5,9 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Paciente } from '../Paciente';
 import { ToastrService } from 'ngx-toastr';
+import { AngularFireStorageReference, AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-modal-pacientes',
@@ -18,7 +21,18 @@ export class ModalPacientesComponent implements OnInit {
     public paciente: Paciente;
     public isEditing = false;
 
-    constructor(private toastr: ToastrService, private angularFire: AngularFireDatabase) {
+    ref: AngularFireStorageReference;
+    task: AngularFireUploadTask;
+    uploadState: Observable<string>;
+    uploadProgress: Observable<number>;
+    downloadURL: Observable<string>;
+    uploadPercent: any;
+    imgUploaded: any;
+
+    constructor(
+        private toastr: ToastrService,
+        private angularFire: AngularFireDatabase,
+        private afStorage: AngularFireStorage) {
         this.paciente = new Paciente;
     }
 
@@ -42,7 +56,29 @@ export class ModalPacientesComponent implements OnInit {
         this.createModal.hide();
     }
 
+    upload(event) {
+
+        // const id = Math.random().toString(36).substring(2);
+
+        // this.storage.upload(path, file);
+        this.ref = this.afStorage.ref(`/upload/patient/${this.paciente.id}`);
+        this.task = this.ref.put(event.target.files[0]);
+        this.uploadPercent = this.task.percentageChanges();
+
+        this.task.snapshotChanges().pipe(
+            finalize(() => {
+              this.downloadURL = this.ref.getDownloadURL();
+              this.downloadURL.subscribe(url => {
+                this.paciente.fotoPerfil = url;
+              });
+            })
+          )
+        .subscribe();
+
+    }
+
     onSubmit(form: NgForm) {
+        form.value.fotoPerfil = this.paciente.fotoPerfil;
         this.angularFire.list(`pacientes/`).set(`${this.paciente.id}`, form.value).then((t: any) => {
             this.createModal.hide();
             this.toastr.success('Paciente salvo com sucesso!', 'Sucesso!');

@@ -2,7 +2,12 @@
 
 <section class="content" *ngIf="isLoaded">
     <header class="content__title">
-        <h1>{{paciente.nome}}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="[ '/pacientes']">Pacientes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{paciente.nome}}</li>
+            </ol>
+        </nav>
         <div class="actions">
             <button class='btn btn-add' (click)="showModal()">
                 <i class="actions__item zmdi zmdi-pencil"></i>
@@ -14,11 +19,11 @@
     <div class="paciente">
         <section class="paciente-header">
             <div class="paciente-container">
-                <img [src]="imgUploaded || paciente.fotoPerfil || 'https://randomuser.me/api/portraits/men/3.jpg'" alt="Avatar"
-                    class="image paciente-photo">
+                <img [src]="imgUploaded || paciente.fotoPerfil || 'https://randomuser.me/api/portraits/men/3.jpg'"
+                    alt="Avatar" class="image paciente-photo">
                 <label class="middle pointer" for="uploadPhoto">
-                    <input id="uploadPhoto" type="file" (change)="upload($event)" accept=".png,.jpg"
-                        style="display: none" />
+                    <input id="uploadPhoto" type="file" capture="camera" (change)="upload($event)"
+                        accept=".png,.jpg,.jpeg" style="display: none" />
                     <span class="paciente-btn-text">Alterar foto</span>
                 </label>
             </div>

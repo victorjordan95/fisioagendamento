@@ -13,6 +13,11 @@
                 <div class="modal-body">
                     <input autocomplete="false" type="hidden" name="id" [(ngModel)]="paciente.id">
 
+                    <div class="form-group" style="width: 100%;">
+                        <label style="width: 100%;">Foto do Paciente</label>
+                        <input type="file" capture="camera" (change)="upload($event)" accept=".png,.jpg,.jpeg" />
+                    </div>
+
                     <div class="form-group">
                         <label>Nome</label>
                         <input autocomplete="false" type="text" class="form-control" placeholder="Nome do Paciente"
@@ -56,6 +61,11 @@
                             name="dataNascimento">
                     </div>
 
+                    <div class="form-group">
+                        <label>Profissão</label>
+                        <input autocomplete="false" type="text" class="form-control" placeholder="Profissão do Paciente"
+                            [(ngModel)]="paciente.profissao" name="profissao">
+                    </div>
 
                 </div>
                 <div class="modal-footer">
