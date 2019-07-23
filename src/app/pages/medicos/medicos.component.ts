@@ -1,21 +1,21 @@
-import { ModalConsultoriosComponent } from './modal-consultorios/modal-consultorios.component';
+import { ModalMedicosComponent } from './modal-medicos/modal-medicos.component';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Consultorio } from './Consultorio';
+import { Medico } from './Medico';
 
 
 @Component({
-  selector: 'app-consultorios',
-  templateUrl: './consultorios.component.html',
-  styleUrls: ['./consultorios.component.scss'],
+  selector: 'app-medicos',
+  templateUrl: './medicos.component.html',
+  styleUrls: ['./medicos.component.scss'],
   providers: [AngularFireAuth, AngularFireDatabase]
 })
-export class ConsultoriosComponent implements OnInit {
+export class MedicosComponent implements OnInit {
 
-  @ViewChild(ModalConsultoriosComponent) modalComponent: ModalConsultoriosComponent;
-    public consultorios: Consultorio[];
+  @ViewChild(ModalMedicosComponent) modalComponent: ModalMedicosComponent;
+    public medicos: Medico[];
     public isLoaded: boolean;
     public filter = '';
     public page = 1;
@@ -27,18 +27,18 @@ export class ConsultoriosComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getConsultorios();
+        this.getMedicos();
     }
 
-    showModal(conultorio?: Consultorio) {
+    showModal(conultorio?: Medico) {
         this.modalComponent.showModal(conultorio);
     }
 
-    getConsultorios() {
+    getMedicos() {
         this.isLoaded = false;
-        this.angularFire.list(`consultorios`).valueChanges().subscribe(
-            (consultorios: Consultorio[]) => {
-                this.consultorios = consultorios;
+        this.angularFire.list(`medicos`).valueChanges().subscribe(
+            (medicos: Medico[]) => {
+                this.medicos = medicos;
                 this.isLoaded = true;
             }
         );

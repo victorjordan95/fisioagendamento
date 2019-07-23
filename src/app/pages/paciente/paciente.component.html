@@ -33,15 +33,14 @@
 
         <div class="">
             <tabset [justified]="true">
-                <tab heading="Fusce">
+                <tab heading="Dados Pessoais">
 
                     <div class="row">
 
-                        <div class="col-xs-12 col-md-6 col-lg-4">
+                        <div class="col-12">
                             <div class="card card-inside">
                                 <div class="card-body">
-                                    <h4 class="card-title">Dados pessoais</h4>
-                                    <h6 class="card-subtitle">Clique em ver mais para maiores detalhes</h6>
+                                    <h2 class="card-title">Dados pessoais</h2>
                                     <p class="card-text">
                                         <span class="d-block">RG: {{paciente.rg  | mask: '00.000.000-A'}}</span>
                                         <span class="d-block">Profissão: {{paciente.profissao}}</span>
@@ -50,112 +49,113 @@
                                         <span class="d-block" *ngIf="paciente.celular">Celular:
                                             {{paciente.celular | mask: '(00) 00000-0000'}}</span>
                                     </p>
-                                    <a (click)="isCollapsed = !isCollapsed" class="link"
-                                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-                                        Ver mais dados
-                                    </a>
                                     <div id="collapseBasic" [collapse]="!isCollapsed">
                                         <span class="d-block">E-mail: {{paciente.email}}</span>
                                         <span class="d-block">Endereço: {{paciente.endereco}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card card-inside">
+                                <div class="card-body">
+                                    <h2 class="card-title">Dados para Contato</h2>
+                                    <p class="card-text">
+                                        <span class="d-block" *ngIf="paciente.telefone">Telefone:
+                                            {{paciente.telefone | mask: '(00) 0000-0000'}}</span>
+                                        <span class="d-block" *ngIf="paciente.celular">Celular:
+                                            {{paciente.celular | mask: '(00) 00000-0000'}}</span>
+                                        <span class="d-block">E-mail: {{paciente.email}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card card-inside">
+                                <div class="card-body">
+                                    <h2 class="card-title">Outras informações</h2>
+                                    <p class="card-text">
                                         <span class="d-block">Aniversário:
                                             {{paciente.aniversario | date:"dd/MM/yy"}}
                                         </span>
-                                    </div>
+                                        <span class="d-block">Observações:
+                                            Alguma observação especial sobre o paciente
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-xs-12 col-md-6 col-lg-4">
-                            <div class="card card-inside">
-                                <div class="card-body">
-                                    <h4 class="card-title">Histório de Pagamento</h4>
-                                    <h6 class="card-subtitle">Últimos 5 pagamentos</h6>
-                                    <div class="table-responsive mb-16">
-                                        <table class="table table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Consulta</th>
-                                                    <th>Data</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Fisioterapia</td>
-                                                    <td>02/06/2019</td>
-                                                    <td>Pago</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Fisioterapia</td>
-                                                    <td>02/05/2019</td>
-                                                    <td>Pago</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <a class="card-link" href="#">Another link</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-md-6 col-lg-4">
-                            <div class="card card-inside">
-                                <div class="card-body">
-                                    <h4 class="card-title">Histório de consultas</h4>
-                                    <h6 class="card-subtitle">Últimas 5 consultas realizada</h6>
-                                    <div class="table-responsive mb-16">
-                                        <table class="table table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Data</th>
-                                                    <th>Consulta</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>02/06/2019</td>
-                                                    <td>Fisioterapia</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>02/05/2019</td>
-                                                    <td>Fisioterapia</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <a class="card-link" href="#">Ver mais</a>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                 </tab>
 
-                <tab heading="Etiam">
-                    <p>Morbi mattis ullamcorper velit. Etiam rhoncus. Phasellus leo dolor, tempus non, auctor
-                        et, hendrerit quis, nisi. Cras id dui. Curabitur turpis. Etiam ut purus mattis mauris
-                        sodales aliquam. Aenean viverra rhoncus pede. Nulla sit amet est. Donec mi odio,
-                        faucibus at, scelerisque quis, convallis in, nisi. Praesent ac sem eget est egestas
-                        volutpat. Cras varius. Morbi mollis tellus ac sapien. In enim justo, rhoncus ut,
-                        imperdiet a, venenatis vitae, justo. Nam ipsum risus, rutrum vitae, vestibulum eu,
-                        molestie vel, lacus. Fusce vel dui.</p>
+                <tab heading="Consultas">
+                    <div class="col-xs-12 col-md-6 col-lg-4">
+                        <div class="card card-inside">
+                            <div class="card-body">
+                                <h4 class="card-title">Histório de consultas</h4>
+                                <h6 class="card-subtitle">Últimas 5 consultas realizada</h6>
+                                <div class="table-responsive mb-16">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Data</th>
+                                                <th>Consulta</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>02/06/2019</td>
+                                                <td>Fisioterapia</td>
+                                            </tr>
+                                            <tr>
+                                                <td>02/05/2019</td>
+                                                <td>Fisioterapia</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <a class="card-link" href="#">Ver mais</a>
+                            </div>
+                        </div>
+                    </div>
                 </tab>
 
-                <tab heading="Vulputate">
-                    <p>Etiam rhoncus. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Cras id
-                        dui. Curabitur turpis. Etiam ut purus mattis mauris sodales aliquam. Aenean viverra
-                        rhoncus pede. Nulla sit amet est. Donec mi odio, faucibus at, scelerisque quis,
-                        convallis in, nisi. Praesent ac sem eget est egestas volutpat. Cras varius. Morbi mollis
-                        tellus ac sapien. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nam
-                        ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Fusce vel dui.Morbi
-                        mattis ullamcorper velit. Etiam rhoncus. Phasellus leo dolor, tempus non, auctor et,
-                        hendrerit quis, nisi. Cras id dui. Curabitur turpis. Etiam ut purus mattis mauris
-                        sodales aliquam. Aenean viverra rhoncus pede. Nulla sit amet est. Donec mi odio,
-                        faucibus at, scelerisque quis, convallis in, nisi. Praesent ac sem eget est egestas
-                        volutpat. Cras varius. Morbi mollis tellus ac sapien. In enim justo, rhoncus ut,
-                        imperdiet a, venenatis vitae, justo. Nam ipsum risus, rutrum vitae, vestibulum eu,
-                        molestie vel, lacus. Fusce vel dui.</p>
+                <tab heading="Pagamentos/Financeiro">
+                    <div class="col-xs-12 col-md-6 col-lg-4">
+                        <div class="card card-inside">
+                            <div class="card-body">
+                                <h4 class="card-title">Histório de Pagamento</h4>
+                                <h6 class="card-subtitle">Últimos 5 pagamentos</h6>
+                                <div class="table-responsive mb-16">
+                                    <table class="table table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Consulta</th>
+                                                <th>Data</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Fisioterapia</td>
+                                                <td>02/06/2019</td>
+                                                <td>Pago</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fisioterapia</td>
+                                                <td>02/05/2019</td>
+                                                <td>Pago</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <a class="card-link" href="#">Another link</a>
+                            </div>
+                        </div>
+                    </div>
                 </tab>
             </tabset>
         </div>

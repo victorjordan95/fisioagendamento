@@ -16,6 +16,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import {NgxMaskModule} from 'ngx-mask';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { FirebaseConfig } from './../environments/firebase.config';
 import { AngularFireModule } from '@angular/fire';
@@ -38,8 +39,8 @@ import { SalaModalComponent } from './pages/salas/sala-modal/sala-modal.componen
 import { SalasComponent } from './pages/salas/salas.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { ModalUsuariosComponent } from './pages/usuarios/modal-usuarios/modal-usuarios.component';
-import { ConsultoriosComponent } from './pages/consultorios/consultorios.component';
-import { ModalConsultoriosComponent } from './pages/consultorios/modal-consultorios/modal-consultorios.component';
+import { MedicosComponent } from './pages/medicos/medicos.component';
+import { ModalMedicosComponent } from './pages/medicos/modal-medicos/modal-medicos.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { ModalPacientesComponent } from './pages/pacientes/modal-pacientes/modal-pacientes.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
@@ -65,8 +66,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SalaModalComponent,
     UsuariosComponent,
     ModalUsuariosComponent,
-    ConsultoriosComponent,
-    ModalConsultoriosComponent,
+    MedicosComponent,
+    ModalMedicosComponent,
     PacientesComponent,
     ModalPacientesComponent,
     PacienteComponent,
@@ -85,6 +86,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxMaskModule.forRoot(),
     TabsModule.forRoot(),
     CollapseModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,

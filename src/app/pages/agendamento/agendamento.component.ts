@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { CriarEventoComponent } from './criar-evento/criar-evento.component';
-import { Consultorio } from '../consultorios/Consultorio';
+import { Medico } from '../medicos/Medico';
 
 @Component({
     selector: 'app-agendamento',
@@ -19,7 +19,7 @@ export class AgendamentoComponent implements OnInit {
     public calendarIsLoaded = false;
     public userId: string;
 
-    public consultorios: Consultorio[];
+    public medicos: Medico[];
     public selectedConsultorio: any;
     public selectedConsultorioId: string;
 
@@ -103,9 +103,9 @@ export class AgendamentoComponent implements OnInit {
     }
 
 
-    getEvents(consultorio: string) {
+    getEvents(medico: string) {
         this.calendarIsLoaded = false;
-        this.angularFire.list(`consultorios/${consultorio}/agenda`).valueChanges().subscribe(
+        this.angularFire.list(`medicos/${medico}/agenda`).valueChanges().subscribe(
             events => {
                 const eventos = events;
                 this.calendarOptions.events = eventos;
@@ -115,10 +115,10 @@ export class AgendamentoComponent implements OnInit {
     }
 
     getConsultorios() {
-        this.angularFire.list(`consultorios`).valueChanges().subscribe(
-            (consultorios: Consultorio[]) => {
-                this.consultorios = consultorios;
-                this.selectedConsultorio = this.consultorios[0];
+        this.angularFire.list(`medicos`).valueChanges().subscribe(
+            (medicos: Medico[]) => {
+                this.medicos = medicos;
+                this.selectedConsultorio = this.medicos[0];
                 this.selectedConsultorioId = this.selectedConsultorio.id;
                 this.getEvents(this.selectedConsultorio.id);
             }

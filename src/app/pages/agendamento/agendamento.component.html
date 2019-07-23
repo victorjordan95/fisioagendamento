@@ -6,8 +6,8 @@
         <div class="actions">
             <select class="form-control" [(ngModel)]="selectedConsultorioId" (ngModelChange)="updateConsultorio($event)"
                 placeholder="Selecione uma sala">
-                <option *ngFor="let consultorio of consultorios" [ngValue]="consultorio.id">
-                    {{consultorio.nome}}
+                <option *ngFor="let medico of medicos" [ngValue]="medico.id">
+                    {{medico.nome}}
                 </option>
             </select>
             <button class='btn btn-add' (click)="showModal()">

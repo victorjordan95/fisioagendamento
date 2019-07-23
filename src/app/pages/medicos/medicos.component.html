@@ -1,14 +1,14 @@
 <app-header></app-header>
-<app-modal-consultorios></app-modal-consultorios>
+<app-modal-medicos></app-modal-medicos>
 <!-- <app-loader *ngIf="!isLoaded"></app-loader> -->
 
 <section class="content">
     <header class="content__title">
-        <h1>Consultórios</h1>
+        <h1>Médicos</h1>
         <div class="actions">
             <button class='btn btn-add' (click)="showModal()">
                 <i class="actions__item zmdi zmdi-plus"></i>
-                <span>Adicionar consultório</span>
+                <span>Adicionar Médico</span>
             </button>
         </div>
     </header>
@@ -39,18 +39,18 @@
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let consultorio of consultorios | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
+                            *ngFor="let medico of medicos | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
                             <td>
                                 <div dropdown>
                                     <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
                                     <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-                                        <span class="dropdown-item" (click)="showModal(consultorio)">Editar</span>
+                                        <span class="dropdown-item" (click)="showModal(medico)">Editar</span>
                                         <!-- <span class="dropdown-item">Excluir</span> -->
                                     </div>
                                 </div>
                             </td>
-                            <td>{{consultorio.nome}}</td>
-                            <td>{{consultorio.local}}</td>
+                            <td>{{medico.nome}}</td>
+                            <td>{{medico.local}}</td>
                         </tr>
                     </tbody>
                 </table>

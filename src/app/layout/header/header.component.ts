@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     itemsMenu = [
         { link: 'home', icon: 'zmdi-home', label: 'Início' },
         { link: 'agendamento', icon: 'zmdi-calendar-note', label: 'Agendamento' },
-        { link: 'consultorios', icon: 'zmdi-accounts-list', label: 'Consultórios' },
+        { link: 'medicos', icon: 'zmdi-accounts-list', label: 'Médicos' },
     ];
 
     // Sub menu visibilities

@@ -112,7 +112,7 @@ export class CriarEventoComponent implements OnInit {
         if (this.canSave) {
             debugger;
             this.angularFire
-                .list(`consultorios/${this.consultorioId}/agenda`).set(`${this.agendamento.id}`, event)
+                .list(`medicos/${this.consultorioId}/agenda`).set(`${this.agendamento.id}`, event)
                 .then((t: any) => {
                     this.modalAgendamento.emit(event);
                     this.createModal.hide();
