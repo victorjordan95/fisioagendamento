@@ -6,4 +6,5 @@ export class Medico {
     cpf: any;
     endereco: any;
     dataNascimento: Date;
+    email: string;
 }

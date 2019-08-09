@@ -31,9 +31,9 @@ export class HeaderComponent implements OnInit {
     sidebarVisible = false;
 
     itemsMenu = [
-        { link: 'home', icon: 'zmdi-home', label: 'Início' },
-        { link: 'agendamento', icon: 'zmdi-calendar-note', label: 'Agendamento' },
-        { link: 'medicos', icon: 'zmdi-accounts-list', label: 'Médicos' },
+        { role: ['ADMIN', 'FUNCIONARIO'] ,link: 'home', icon: 'zmdi-home', label: 'Início' },
+        { role: ['ADMIN', 'FUNCIONARIO'] ,link: 'agendamento', icon: 'zmdi-calendar-note', label: 'Agendamento' },
+        { role: ['ADMIN', 'FUNCIONARIO'] ,link: 'medicos', icon: 'zmdi-accounts-list', label: 'Médicos' },
     ];
 
     // Sub menu visibilities

@@ -19,7 +19,7 @@ export class RoleGuardService implements CanActivate {
     // decode the token to get its payload
     const user = atob(localStorage.getItem('usuario')).split(',');
 
-    if (!this.auth.canActivate() || !expectedRole.includes(user[4])) {
+    if (!this.auth.canActivate() || !expectedRole.includes(user[3])) {
       this.toastr.error(`Verifique se você realmente possui autorização para acessar esta funcionalidade`, 'Acesso negado!');
       return false;
     }

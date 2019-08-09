@@ -14,7 +14,7 @@
                     <input type="hidden" name="id" [(ngModel)]="agendamento.id">
 
                     <div class="form-group">
-                        <label>Nome Evento</label>
+                        <label>Nome Paciente</label>
                         <input type="text" class="form-control" placeholder="Nome do Evento" [(ngModel)]="agendamento.title"
                             name="title" required [disabled]="isViewMode">
                     </div>
@@ -22,8 +22,8 @@
                     <div class="flex-row">
                         <div class="form-group">
                             <label>Data Início</label>
-                            <input type="date" class="form-control" placeholder="Data de início" [(ngModel)]="agendamento.startDate"
-                                name="startDate" required [disabled]="isViewMode">
+                            <input type="text" class="form-control" placeholder="Data de início" [(ngModel)]="agendamento.startDate"
+                                name="startDate" required [disabled]="isViewMode" bsDatepicker>
                         </div>
                         <div class="form-group">
                             <label>Hora Início</label>
@@ -58,8 +58,8 @@
                         </select>
                         <div class="form-group">
                             <label>Data Final</label>
-                            <input type="date" class="form-control" placeholder="Data Final"
-                                [(ngModel)]="agendamento.endRecur" name="endRecur" required [disabled]="isViewMode">
+                            <input type="text" class="form-control" placeholder="Data Final"
+                                [(ngModel)]="agendamento.endRecur" name="endRecur" required [disabled]="isViewMode" bsDatepicker>
                         </div>
                     </div>
 

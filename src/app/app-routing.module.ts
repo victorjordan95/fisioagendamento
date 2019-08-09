@@ -7,15 +7,16 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { MedicosComponent } from './pages/medicos/medicos.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { PacienteComponent } from './pages/paciente/paciente.component';
+import { RoleGuardService } from './shared/services/role-guard.service';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'agendamento', component: AgendamentoComponent },
-  { path: 'salas', component: SalasComponent},
-  { path: 'medicos', component: MedicosComponent},
+  { path: 'agendamento', component: AgendamentoComponent, canActivate: [RoleGuardService], data: { expectedRole: ['FUNCIONARIO', 'ADMIN']}},
+  { path: 'salas', component: SalasComponent, canActivate: [RoleGuardService], data: { expectedRole: ['ADMIN']}},
+  { path: 'medicos', component: MedicosComponent, canActivate: [RoleGuardService], data: { expectedRole: ['ADMIN']}},
   { path: 'usuarios', component: UsuariosComponent},
-  { path: 'pacientes', component: PacientesComponent},
-  { path: 'paciente/:id', component: PacienteComponent}
+  { path: 'pacientes', component: PacientesComponent, canActivate: [RoleGuardService], data: { expectedRole: ['FUNCIONARIO', 'ADMIN']}},
+  { path: 'paciente/:id', component: PacienteComponent, canActivate: [RoleGuardService], data: { expectedRole: ['FUNCIONARIO', 'ADMIN']}}
 ];
 
 @NgModule({

@@ -45,3 +45,23 @@ header {
     z-index: 5;
     top: 0px;
 }
+
+.fc {
+    .fc-day-header {
+        background-color: #592828;
+        color: #fff;
+    }
+
+    .fc-day-number {
+        float: left!important;
+        font-weight: bold;
+        margin-left: 8px;
+    }
+
+    td.fc-sun,
+    td.fc-sat {
+        background-color: #E8EAF6;
+        color: #592828;
+    }
+
+}

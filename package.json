@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@ng-select/ng-select": "^3.0.5",
     "angularfire2": "^5.0.0-rc.10",
     "ap-angular2-fullcalendar": "^1.6.4",
     "bootstrap": "4.0.0-beta",

@@ -31,5 +31,7 @@ export class SharedService {
         this.maThemeSubject.next(this.maTheme);
     }
 
+    getUserRole = (): string => atob(localStorage.getItem('usuario')).split(',')[3];
+
 
 }

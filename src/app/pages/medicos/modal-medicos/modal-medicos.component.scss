@@ -1,0 +1,12 @@
+.flex-row {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+
+    .form-group {
+        width: 100%;
+        @media screen and (min-width: 768px) {
+            width: 45%;
+        }
+    }
+}

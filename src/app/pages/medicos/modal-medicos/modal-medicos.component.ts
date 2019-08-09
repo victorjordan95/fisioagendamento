@@ -60,6 +60,10 @@ export class ModalMedicosComponent implements OnInit {
                     this.createModal.hide();
                     this.toastr.success('Médico cadastrado com sucesso!', 'Sucesso!');
                 });
+            }).catch(err => {
+                if (err.code === 'auth/email-already-in-use') {
+                    this.toastr.error('Este e-mail já foi utilizado, use outro, por favor!', 'Erro!');
+                }
             });
         }
     }
