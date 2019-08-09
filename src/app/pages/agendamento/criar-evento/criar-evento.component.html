@@ -15,7 +15,7 @@
 
                     <div class="form-group">
                         <label>Nome Paciente</label>
-                        <input type="text" class="form-control" placeholder="Nome do Evento" [(ngModel)]="agendamento.title"
+                        <input type="text" class="form-control" placeholder="Nome do Paciente" [(ngModel)]="agendamento.title"
                             name="title" required [disabled]="isViewMode">
                     </div>
 
@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label>Data Início</label>
                             <input type="text" class="form-control" placeholder="Data de início" [(ngModel)]="agendamento.startDate"
-                                name="startDate" required [disabled]="isViewMode" bsDatepicker>
+                                name="startDate" required [disabled]="isViewMode" bsDatepicker autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label>Hora Início</label>

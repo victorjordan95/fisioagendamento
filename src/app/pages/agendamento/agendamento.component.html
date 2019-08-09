@@ -4,7 +4,7 @@
     <header class="content__title">
         <h1>Agendamento</h1>
         <div class="actions">
-            <select class="form-control" [(ngModel)]="selectedConsultorioId" (ngModelChange)="updateConsultorio($event)"
+            <select class="form-control" [(ngModel)]="selectedMedicoId" (ngModelChange)="updateConsultorio($event)"
                 placeholder="Selecione uma sala">
                 <option *ngFor="let medico of medicos" [ngValue]="medico.id">
                     {{medico.nome}}

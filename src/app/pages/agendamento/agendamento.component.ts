@@ -20,17 +20,22 @@ export class AgendamentoComponent implements OnInit {
     public userId: string;
 
     public medicos: Medico[];
-    public selectedConsultorio: any;
-    public selectedConsultorioId: string;
+    public selectedMedico: any;
+    public selectedMedicoId: string;
 
     public user: string;
     public calendarOptions: any = {
+        allDayText: 'Dia todo',
         height: 'parent',
+        slotLabelFormat: 'h:mm',
+        slotLabel: true,
         fixedWeekCount: false,
         defaultDate: new Date(),
         defaultView: window.innerWidth > 768 ? 'month' : 'list',
+        displayEventTime: true,
         editable: true,
         locale: 'pt-BR',
+        nowIndicator: true,
         eventLimit: true,
         events: [],
         eventClick: (event, jsEvent, view) => {
@@ -82,24 +87,24 @@ export class AgendamentoComponent implements OnInit {
         this.afAuth.authState.subscribe(user => {
             if (user) {
                 this.userId = user.uid;
-                this.getConsultorios();
+                this.getMedicos();
             }
         });
     }
 
     showModal(event?: any) {
-        this.modalComponent.showModal(this.selectedConsultorioId, event);
+        this.modalComponent.showModal(this.selectedMedicoId, event);
     }
 
 
     updateConsultorio(e: any) {
-        this.selectedConsultorioId = e;
+        this.selectedMedicoId = e;
         this.getEvents(e);
     }
 
     updateSchedules(e: any) {
         this.toastr.success(`Evento "${e.title}" foi cadastrado com sucesso `, 'Sucesso!');
-        this.getEvents(this.selectedConsultorio.id);
+        this.getEvents(this.selectedMedico.id);
     }
 
 
@@ -114,13 +119,13 @@ export class AgendamentoComponent implements OnInit {
         );
     }
 
-    getConsultorios() {
+    getMedicos() {
         this.angularFire.list(`medicos`).valueChanges().subscribe(
             (medicos: Medico[]) => {
                 this.medicos = medicos;
-                this.selectedConsultorio = this.medicos[0];
-                this.selectedConsultorioId = this.selectedConsultorio.id;
-                this.getEvents(this.selectedConsultorio.id);
+                this.selectedMedico = this.medicos[0];
+                this.selectedMedicoId = this.selectedMedico.id;
+                this.getEvents(this.selectedMedico.id);
             }
         );
     }

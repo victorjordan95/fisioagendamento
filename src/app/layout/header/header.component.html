@@ -130,9 +130,9 @@
         </div>
 
         <ul class="navigation">
-            <div  *ngFor="let item of itemsMenu" >
-                <li
-                    *ngIf="item.role.includes(sharedService.getUserRole())" routerLinkActive="navigation__active" (click)="closeMenu()">
+            <div *ngFor="let item of itemsMenu">
+                <li *ngIf="item.role.includes(sharedService.getUserRole())" routerLinkActive="navigation__active"
+                    (click)="closeMenu()">
                     <a [routerLink]="['/', item.link]">
                         <i [ngClass]="['zmdi', item.icon]"></i>
                         {{item.label}}
@@ -140,25 +140,27 @@
                 </li>
             </div>
 
-            <li routerLinkActive="navigation__sub--active" class="navigation__sub">
-                <a (click)="toggleNavigationSub('Forms', $event)">
-                    <i class="zmdi zmdi-accounts-add"></i>
-                    Usuários
-                </a>
+            <div>
+                <li routerLinkActive="navigation__sub--active" class="navigation__sub">
+                    <a (click)="toggleNavigationSub('Forms', $event)">
+                        <i class="zmdi zmdi-accounts-add"></i>
+                        Usuários
+                    </a>
 
-                <ul [@toggleHeight]="navigationSubState.Forms">
-                    <li routerLinkActive="navigation__active">
-                        <a [routerLink]="['/usuarios']">
-                            Usuários do Sistema
-                        </a>
-                    </li>
-                    <li routerLinkActive="navigation__active">
-                        <a [routerLink]="['/pacientes']">
-                            Pacientes
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                    <ul [@toggleHeight]="navigationSubState.Forms">
+                        <li routerLinkActive="navigation__active">
+                            <a [routerLink]="['/usuarios']">
+                                Usuários do Sistema
+                            </a>
+                        </li>
+                        <li routerLinkActive="navigation__active">
+                            <a [routerLink]="['/pacientes']">
+                                Pacientes
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
         </ul>
     </perfect-scrollbar>
 </aside>

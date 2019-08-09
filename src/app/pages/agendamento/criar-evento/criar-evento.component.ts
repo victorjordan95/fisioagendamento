@@ -7,6 +7,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { EventEmitter } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-criar-evento',
@@ -76,10 +77,14 @@ export class CriarEventoComponent implements OnInit {
     }
 
     onSubmit(form: NgForm) {
+        const date = form.value.startDate.toISOString().split('T');
         form.value.repeatEvent = this.agendamento.repeatEvent;
-        form.value.start = `${this.agendamento.startDate}T${this.agendamento.startHour}`;
-        form.value.end = `${this.agendamento.startDate}T${this.agendamento.endHour}`;
+        form.value.startDate = form.value.startDate.toISOString();
+
+        form.value.start = `${date[0]}T${this.agendamento.startHour}`;
+        form.value.end = `${date[0]}T${this.agendamento.endHour}`;
         form.value.endDate = form.value.startDate;
+
         form.value.allDay = false;
 
         if (this.agendamento.repeatEvent) {
@@ -110,7 +115,6 @@ export class CriarEventoComponent implements OnInit {
         }
 
         if (this.canSave) {
-            debugger;
             this.angularFire
                 .list(`medicos/${this.consultorioId}/agenda`).set(`${this.agendamento.id}`, event)
                 .then((t: any) => {
