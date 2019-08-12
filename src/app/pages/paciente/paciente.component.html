@@ -100,8 +100,11 @@
                                         <thead>
                                             <tr>
                                                 <th>Ação</th>
-                                                <th>Data</th>
+                                                <th>Agendamento</th>
+                                                <th>Médico</th>
                                                 <th>Consulta</th>
+                                                <th>Status</th>
+                                                <th>Valor</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -115,8 +118,11 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{consulta.data | date: 'dd/MM/yyyy'}} - {{consulta.horaInicio}} até {{consulta.horaTermino}}</td>
+                                                <td>{{consulta.medico}}</td>
+                                                <td>{{consulta.tipoConsulta}}</td>
+                                                <td>{{consulta.status}}</td>
+                                                <td>{{consulta.valor}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

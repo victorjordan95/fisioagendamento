@@ -82,8 +82,16 @@ export class PacienteComponent implements OnInit {
     getConsultas(id: string | number) {
         this.angularFire.object(`pacientes/${id}/consultas`).valueChanges().subscribe(
             (consultas: any) => {
-                console.log(consultas);
-                this.consultas = consultas;
+                let todasConsultas = [];
+                for (var key in consultas) {
+                   if (consultas[key] === undefined) {
+                        continue;
+                   }
+                   todasConsultas.push(consultas[key]);
+                }
+                this.consultas = todasConsultas;
+                // this.consultas = [consultas];
+                console.log(this.consultas);
                 this.isLoaded = true;
             }
         );

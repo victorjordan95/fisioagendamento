@@ -66,4 +66,9 @@ header {
     .fc-title, .fc-time span, .fc-time {
         color: #000;
     }
+
+    .fc-now-indicator {
+        border: 1px solid red;
+        width: 100vw;
+    }
 }
