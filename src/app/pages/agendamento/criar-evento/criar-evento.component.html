@@ -19,11 +19,21 @@
                             name="title" required [disabled]="isViewMode">
                     </div>
 
+                    <div class="form-group">
+                        <label>Selecione um paciente</label>
+                        <select class="form-control" [(ngModel)]="agendamento.pacienteId" name="pacienteId" [disabled]="isViewMode">
+                            <option *ngFor="let paciente of pacientes" [ngValue]="paciente.id">
+                                {{paciente.nome}}
+                            </option>
+                        </select>
+                    </div>
+
                     <div class="flex-row">
                         <div class="form-group">
                             <label>Data Início</label>
                             <input type="text" class="form-control" placeholder="Data de início" [(ngModel)]="agendamento.startDate"
-                                name="startDate" required [disabled]="isViewMode" bsDatepicker autocomplete="off">
+                                name="startDate" required [disabled]="isViewMode" bsDatepicker autocomplete="off"
+                                [(bsValue)]="newVar" value="{{ newVar | date:'dd/MM/yyyy' }}">
                         </div>
                         <div class="form-group">
                             <label>Hora Início</label>
@@ -39,6 +49,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Tipo consulta</label>
+                        <select class="form-control" [(ngModel)]="agendamento.tipoConsulta" name="tipoConsulta" [disabled]="isViewMode">
+                            <option *ngFor="let tipoConsulta of tiposConsulta" [ngValue]="tipoConsulta.label">
+                                {{tipoConsulta.label}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <input type="checkbox" class="form-check-input" 
                             [(ngModel)]="agendamento.repeatEvent" name="repeatEvent" [checked]="agendamento.repeatEvent" 
                             (ngModelChange)="changeRepeatEvent($event)" id="repeatEvent" [disabled]="isViewMode"
@@ -49,7 +68,7 @@
                     </div>
 
                     <div class="form-group" *ngIf="agendamento.repeatEvent">
-                        <label for="repeticaoDia">Repetir agendamento nos dias:</label>
+                        <label for="repeticaoDia">Repetir agendamento nos dias</label>
                         <select multiple id="repeticaoDia" class="form-control" [(ngModel)]="agendamento.dow" name="dow"
                             [disabled]="isViewMode">
                             <option *ngFor="let dia of dias" [ngValue]="dia.id">

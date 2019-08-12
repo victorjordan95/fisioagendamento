@@ -99,18 +99,24 @@
                                     <table class="table table-striped mb-0">
                                         <thead>
                                             <tr>
+                                                <th>Ação</th>
                                                 <th>Data</th>
                                                 <th>Consulta</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>02/06/2019</td>
-                                                <td>Fisioterapia</td>
-                                            </tr>
-                                            <tr>
-                                                <td>02/05/2019</td>
-                                                <td>Fisioterapia</td>
+                                            <tr *ngFor="let consulta of consultas | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
+                                            <td>
+                                                    <div dropdown>
+                                                        <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
+                                                        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                                            <span class="dropdown-item" (click)="showModal(paciente)">Editar</span>
+                                                            <!-- <span class="dropdown-item">Excluir</span> -->
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
                                             </tr>
                                         </tbody>
                                     </table>

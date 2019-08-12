@@ -10,4 +10,7 @@ export class Agendamento {
     dow?: any;
     allDay?: Boolean;
     repeatEvent?: Boolean;
+    pacienteId?: number | string;
+    medico: number | string;
+    tipoConsulta: string;
 }

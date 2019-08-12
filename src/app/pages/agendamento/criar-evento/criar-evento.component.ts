@@ -8,6 +8,7 @@ import { EventEmitter } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as moment from 'moment';
+import { Paciente } from '../../pacientes/Paciente';
 
 @Component({
     selector: 'app-criar-evento',
@@ -33,7 +34,14 @@ export class CriarEventoComponent implements OnInit {
         { id: 6, label: 'Sábado' },
     ];
 
-    private consultorioId: string;
+    public tiposConsulta = [
+        { id: 0, label: 'Primeira consulta'},
+        { id: 1, label: 'Retorno'}
+    ]
+
+    public pacientes: Paciente[];
+
+    private medicoId: string;
     private canSave: boolean;
 
     constructor(private angularFire: AngularFireDatabase, private toastr: ToastrService) {
@@ -42,10 +50,11 @@ export class CriarEventoComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getPacientes();
     }
 
-    showModal(consultorioId: string, event?: any): void {
-        this.consultorioId = consultorioId;
+    showModal(medicoId: string, event?: any): void {
+        this.medicoId = medicoId;
         if (event) {
             this.isNew = false;
             this.agendamento = event[0];
@@ -87,6 +96,8 @@ export class CriarEventoComponent implements OnInit {
 
         form.value.allDay = false;
 
+        form.value.medico = this.medicoId;
+
         if (this.agendamento.repeatEvent) {
             form.value.start = this.agendamento.startHour;
             form.value.end = this.agendamento.endHour;
@@ -115,11 +126,24 @@ export class CriarEventoComponent implements OnInit {
         }
 
         if (this.canSave) {
+            const consulta = { 
+                data: event.startDate,
+                horaInicio: event.startHour, 
+                horaTermino: event.endHour, 
+                medico: event.medico, 
+                valor: '', 
+                status: 'AGENDADO' ,
+                tipoConsulta: event.tipoConsulta
+            }
+
             this.angularFire
-                .list(`medicos/${this.consultorioId}/agenda`).set(`${this.agendamento.id}`, event)
+                .list(`medicos/${this.medicoId}/agenda`).set(`${this.agendamento.id}`, event)
                 .then((t: any) => {
                     this.modalAgendamento.emit(event);
                     this.createModal.hide();
+
+                    this.angularFire.list(`pacientes/${event.pacienteId}/consultas`).set(`${this.agendamento.id}`, consulta)
+
                 });
         } else {
             this.toastr.error(`Ops! Aparentemente já existe um evento neste horário!`, 'Conflito de Horário!');
@@ -129,6 +153,12 @@ export class CriarEventoComponent implements OnInit {
 
     enableEdit() {
         this.isViewMode = false;
+    }
+
+    getPacientes(): void {
+        this.angularFire.list(`pacientes`).valueChanges().subscribe(
+            (pacientes: Paciente[]) => this.pacientes = pacientes
+        );
     }
 
 }

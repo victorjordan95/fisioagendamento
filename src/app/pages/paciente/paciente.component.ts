@@ -18,6 +18,12 @@ export class PacienteComponent implements OnInit {
     public paciente: Paciente[];
     public isLoaded: boolean;
     public userId: string;
+    public consultas: string[];
+
+    public filter = '';
+    public page = 1;
+    public key = 'nome';
+    public reverse = false;
 
     ref: AngularFireStorageReference;
     task: AngularFireUploadTask;
@@ -38,10 +44,6 @@ export class PacienteComponent implements OnInit {
     }
 
     upload(event) {
-
-        // const id = Math.random().toString(36).substring(2);
-
-        // this.storage.upload(path, file);
         this.ref = this.afStorage.ref(`/upload/patient/${this.userId}`);
         this.task = this.ref.put(event.target.files[0]);
         this.uploadPercent = this.task.percentageChanges();
@@ -70,11 +72,27 @@ export class PacienteComponent implements OnInit {
     getPaciente(id: string | number) {
         this.isLoaded = false;
         this.angularFire.object(`pacientes/${id}`).valueChanges().subscribe(
-            (paciente: Paciente[]) => {
+            (paciente: any) => {
                 this.paciente = paciente;
+                this.getConsultas(id);
+            }
+        );
+    }
+
+    getConsultas(id: string | number) {
+        this.angularFire.object(`pacientes/${id}/consultas`).valueChanges().subscribe(
+            (consultas: any) => {
+                console.log(consultas);
+                this.consultas = consultas;
                 this.isLoaded = true;
             }
         );
     }
+
+    sort(key: string) {
+        this.key = key;
+        this.reverse = !this.reverse;
+    }
+
 
 }
