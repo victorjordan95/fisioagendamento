@@ -22,6 +22,7 @@ export class CriarEventoComponent implements OnInit {
 
     public isViewMode: boolean;
     public isNew: boolean;
+    public newVar: any;
 
     public agendamento: Agendamento;
     public dias = [
