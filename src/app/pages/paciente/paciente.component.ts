@@ -18,7 +18,7 @@ export class PacienteComponent implements OnInit {
     public paciente: Paciente[];
     public isLoaded: boolean;
     public userId: string;
-    public consultas: string[];
+    public consultas: any[] = [];
 
     public filter = '';
     public page = 1;
@@ -73,6 +73,7 @@ export class PacienteComponent implements OnInit {
         this.isLoaded = false;
         this.angularFire.object(`pacientes/${id}`).valueChanges().subscribe(
             (paciente: any) => {
+                console.log(paciente)
                 this.paciente = paciente;
                 this.getConsultas(id);
             }
@@ -82,16 +83,11 @@ export class PacienteComponent implements OnInit {
     getConsultas(id: string | number) {
         this.angularFire.object(`pacientes/${id}/consultas`).valueChanges().subscribe(
             (consultas: any) => {
-                let todasConsultas = [];
-                for (var key in consultas) {
-                   if (consultas[key] === undefined) {
-                        continue;
-                   }
-                   todasConsultas.push(consultas[key]);
+                for (const consulta in consultas) {
+                    if (consulta) {
+                        this.consultas.push(consultas[consulta])
+                    }
                 }
-                this.consultas = todasConsultas;
-                // this.consultas = [consultas];
-                console.log(this.consultas);
                 this.isLoaded = true;
             }
         );

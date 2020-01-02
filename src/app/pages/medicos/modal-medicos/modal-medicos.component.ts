@@ -30,6 +30,7 @@ export class ModalMedicosComponent implements OnInit {
         if (e) {
             this.medico = e;
             this.isEditing = true;
+            this.medico.dataNascimento = new Date(e.dataNascimento);
         } else {
             this.isEditing = false;
             const x = new Date();
@@ -44,8 +45,12 @@ export class ModalMedicosComponent implements OnInit {
     }
 
     onSubmit(form: NgForm) {
+        form.value.dataNascimento = form.value.dataNascimento.toLocaleDateString();
         if (this.isEditing) {
-            this.angularFire.list(`medicos/`).set(`${this.medico.id}`, form.value).then((t: any) => {
+            this.angularFire.list(`medicos/`).set(`${this.medico.id}`,
+                {...form.value, 'agenda': {...this.medico.agenda}}
+            )
+                .then((t: any) => {
                 this.createModal.hide();
                 this.toastr.success('Médico editado com sucesso!', 'Sucesso!');
             });

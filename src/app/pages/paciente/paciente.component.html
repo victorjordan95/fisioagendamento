@@ -104,25 +104,23 @@
                                                 <th>Médico</th>
                                                 <th>Consulta</th>
                                                 <th>Status</th>
-                                                <th>Valor</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let consulta of consultas | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
                                             <td>
-                                                    <div dropdown>
-                                                        <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
-                                                        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-                                                            <span class="dropdown-item" (click)="showModal(paciente)">Editar</span>
-                                                            <!-- <span class="dropdown-item">Excluir</span> -->
-                                                        </div>
+                                                <div dropdown>
+                                                    <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
+                                                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                                        <span class="dropdown-item" (click)="showModal(paciente)">Editar</span>
+                                                        <!-- <span class="dropdown-item">Excluir</span> -->
                                                     </div>
+                                                </div>
                                                 </td>
-                                                <td>{{consulta.data | date: 'dd/MM/yyyy'}} - {{consulta.horaInicio}} até {{consulta.horaTermino}}</td>
-                                                <td>{{consulta.medico}}</td>
+                                                <td>{{consulta.data | date: 'dd/MM/yyyy'}}</td>
+                                                <td>{{consulta.tipoConsulta}}</td>
                                                 <td>{{consulta.tipoConsulta}}</td>
                                                 <td>{{consulta.status}}</td>
-                                                <td>{{consulta.valor}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

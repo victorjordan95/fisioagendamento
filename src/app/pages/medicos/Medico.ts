@@ -5,6 +5,9 @@ export class Medico {
     rg: any;
     cpf: any;
     endereco: any;
-    dataNascimento: Date;
+    dataNascimento: any;
     email: string;
+    agenda: any;
+    valorConsulta: number;
+    valorRetorno: number;
 }

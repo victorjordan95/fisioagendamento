@@ -47,6 +47,7 @@ import { ModalPacientesComponent } from './pages/pacientes/modal-pacientes/modal
 import { PacienteComponent } from './pages/paciente/paciente.component';
 import { ModalPacienteComponent } from './pages/paciente/modal-paciente/modal-paciente.component';
 import { LoaderComponent } from './layout/loader/loader.component';
+import { VerificarHorarioComponent } from './pages/agendamento/verificar-horario/verificar-horario.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -73,7 +74,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalPacientesComponent,
     PacienteComponent,
     ModalPacienteComponent,
-    LoaderComponent
+    LoaderComponent,
+    VerificarHorarioComponent
   ],
   imports: [
     BrowserModule,

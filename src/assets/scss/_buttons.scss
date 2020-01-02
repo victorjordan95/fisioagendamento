@@ -50,7 +50,12 @@
         }
     }
 
-
+    &.check-time {
+        bottom: 84px;
+        @media screen and (min-width: 767px) {
+            bottom: auto;
+        }
+    }
 }
 
 .btn-light {

@@ -1,0 +1,35 @@
+<div class="modal fade" bsModal #createModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="createModal.hide()">&times;</button>
+                <h4 class="modal-title">
+                    Disponibilidade - {{currentCheckingDate | date: 'dd/MM'}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Alterar data</label>
+                    <input 
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="currentCheckingDate"
+                        name="startDate" 
+                        bsDatepicker 
+                        [(bsValue)]="newVar" 
+                        value="{{ newVar | date:'dd/MM/yyyy' }}"
+                        (ngModelChange)="checkNewDate($event)"
+                    >
+                </div>
+
+                <div class="available-hours">
+                    <div class="available" *ngFor="let available of availableHour">
+                        {{available}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

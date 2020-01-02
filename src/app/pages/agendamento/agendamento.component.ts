@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { CriarEventoComponent } from './criar-evento/criar-evento.component';
 import { Medico } from '../medicos/Medico';
+import { VerificarHorarioComponent } from './verificar-horario/verificar-horario.component';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as $ from 'jquery'
 
 @Component({
     selector: 'app-agendamento',
@@ -15,6 +17,7 @@ import { Medico } from '../medicos/Medico';
 })
 export class AgendamentoComponent implements OnInit {
     @ViewChild(CriarEventoComponent) modalComponent: CriarEventoComponent;
+    @ViewChild(VerificarHorarioComponent) freeTimeModal: VerificarHorarioComponent;
 
     public calendarIsLoaded = false;
     public userId: string;
@@ -50,7 +53,9 @@ export class AgendamentoComponent implements OnInit {
         allDaySlot: true
     };
 
-    constructor(private angularFire: AngularFireDatabase, private afAuth: AngularFireAuth, private toastr: ToastrService) {
+    constructor(private angularFire: AngularFireDatabase,
+        private db: AngularFirestore, private afAuth: AngularFireAuth,
+        private toastr: ToastrService) {
         if (window.innerWidth > 768) {
             this.calendarOptions.header = {
                 left: 'prev,next today',
@@ -93,9 +98,12 @@ export class AgendamentoComponent implements OnInit {
     }
 
     showModal(event?: any) {
-        this.modalComponent.showModal(this.selectedMedicoId, event);
+        this.modalComponent.showModal(this.selectedMedicoId, event, this.selectedMedico.valorConsulta, this.selectedMedico.valorRetorno);
     }
 
+    showFreeTimeModal() {
+        this.freeTimeModal.showModal();
+    }
 
     updateConsultorio(e: any) {
         this.selectedMedicoId = e;
@@ -107,18 +115,6 @@ export class AgendamentoComponent implements OnInit {
         this.getEvents(this.selectedMedico.id);
     }
 
-
-    getEvents(medico: string) {
-        this.calendarIsLoaded = false;
-        this.angularFire.list(`medicos/${medico}/agenda`).valueChanges().subscribe(
-            events => {
-                const eventos = events;
-                this.calendarOptions.events = eventos;
-                this.calendarIsLoaded = true;
-            }
-        );
-    }
-
     getMedicos() {
         this.angularFire.list(`medicos`).valueChanges().subscribe(
             (medicos: Medico[]) => {
@@ -126,6 +122,20 @@ export class AgendamentoComponent implements OnInit {
                 this.selectedMedico = this.medicos[0];
                 this.selectedMedicoId = this.selectedMedico.id;
                 this.getEvents(this.selectedMedico.id);
+            }
+        );
+    }
+
+    getEvents(medico: string) {
+        // this.angularFire.list(`medicos/${medico}/agenda`, ref => ref.).valueChanges().subscribe(e =>
+        //     console.log(e)
+        // );
+        this.calendarIsLoaded = false;
+        this.angularFire.list(`medicos/${medico}/agenda`).valueChanges().subscribe(
+            events => {
+                const eventos = events;
+                this.calendarOptions.events = eventos;
+                this.calendarIsLoaded = true;
             }
         );
     }

@@ -1,5 +1,7 @@
 <app-layout></app-layout>
 <app-criar-evento (modalAgendamento)='updateSchedules($event)' [events]="calendarOptions.events"></app-criar-evento>
+<app-verificar-horario [events]="calendarOptions.events"></app-verificar-horario>
+
 <section class="content">
     <header class="content__title">
         <h1>Agendamento</h1>
@@ -13,6 +15,10 @@
             <button class='btn btn-add' (click)="showModal()">
                 <i class="actions__item zmdi zmdi-plus"></i>
                 <span>Adicionar consulta</span>
+            </button>
+            <button class='btn btn-add check-time' (click)="showFreeTimeModal()">
+                <i class="actions__item zmdi zmdi-calendar-check"></i>
+                <span>Verificar horário</span>
             </button>
         </div>
     </header>

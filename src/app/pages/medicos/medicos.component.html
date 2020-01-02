@@ -31,9 +31,13 @@
                                 Nome
                                 <i class="zmdi" *ngIf="key =='nome'" [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
                             </th>
-                            <th (click)="sort('local')" class="pointer">
-                                Local
-                                <i class="zmdi" *ngIf="key =='local'" [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
+                            <th (click)="sort('especialidade')" class="pointer">
+                                Especialidade
+                                <i class="zmdi" *ngIf="key =='especialidade'" [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
+                            </th>
+                            <th (click)="sort('dataNascimento')" class="pointer">
+                                Aniversário
+                                <i class="zmdi" *ngIf="key =='dataNascimento'" [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
                             </th>
                         </tr>
                     </thead>
@@ -50,7 +54,8 @@
                                 </div>
                             </td>
                             <td>{{medico.nome}}</td>
-                            <td>{{medico.local}}</td>
+                            <td>{{medico.especialidade}}</td>
+                            <td>{{medico.dataNascimento}}</td>
                         </tr>
                     </tbody>
                 </table>
