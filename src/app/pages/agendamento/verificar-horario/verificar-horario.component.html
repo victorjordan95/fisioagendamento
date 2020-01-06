@@ -23,10 +23,13 @@
                     >
                 </div>
 
-                <div class="available-hours">
-                    <div class="available" *ngFor="let available of availableHour">
+                <div class="available-hours" *ngIf="!isFiltering">
+                    <div class="available" *ngFor="let available of availableHour" (click)="sendClickedDay(available)">
                         {{available}}
                     </div>
+                </div>
+                <div *ngIf="isFiltering">
+                    Verificando horários...
                 </div>
             </div>
 

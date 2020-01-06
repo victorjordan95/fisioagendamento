@@ -23,7 +23,7 @@ export class PacienteComponent implements OnInit {
     public filter = '';
     public page = 1;
     public key = 'nome';
-    public reverse = false;
+    public reverse = true;
 
     ref: AngularFireStorageReference;
     task: AngularFireUploadTask;
@@ -53,7 +53,6 @@ export class PacienteComponent implements OnInit {
               this.downloadURL = this.ref.getDownloadURL();
               this.downloadURL.subscribe(url => {
                 this.imgUploaded = url;
-                console.log(url);
                 const data = {...this.paciente, fotoPerfil: url};
                 this.angularFire.list(`pacientes/`).set(`${this.userId}`, data).then((t: any) => {
                     this.toastr.success('Foto atualizada com sucesso!', 'Sucesso!');
@@ -73,7 +72,6 @@ export class PacienteComponent implements OnInit {
         this.isLoaded = false;
         this.angularFire.object(`pacientes/${id}`).valueChanges().subscribe(
             (paciente: any) => {
-                console.log(paciente)
                 this.paciente = paciente;
                 this.getConsultas(id);
             }

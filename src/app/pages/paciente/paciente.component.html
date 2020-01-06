@@ -94,7 +94,7 @@
                     <div class="col-xs-12 card">
                             <div class="card-body">
                                 <h4 class="card-title">Histório de consultas</h4>
-                                <h6 class="card-subtitle">Últimas 5 consultas realizada</h6>
+                                <h6 class="card-subtitle">Consultas realizada</h6>
                                 <div class="table-responsive mb-16">
                                     <table class="table table-striped mb-0">
                                         <thead>
@@ -107,7 +107,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let consulta of consultas | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
+                                            <tr *ngFor="let consulta of consultas | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 5, currentPage: page };">
                                             <td>
                                                 <div dropdown>
                                                     <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>

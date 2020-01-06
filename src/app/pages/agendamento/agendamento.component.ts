@@ -53,6 +53,8 @@ export class AgendamentoComponent implements OnInit {
         allDaySlot: true
     };
 
+    public availableDate: any;
+
     constructor(private angularFire: AngularFireDatabase,
         private db: AngularFirestore, private afAuth: AngularFireAuth,
         private toastr: ToastrService) {
@@ -113,6 +115,22 @@ export class AgendamentoComponent implements OnInit {
     updateSchedules(e: any) {
         this.toastr.success(`Evento "${e.title}" foi cadastrado com sucesso `, 'Sucesso!');
         this.getEvents(this.selectedMedico.id);
+    }
+
+    checkSchedule(e: any) {
+        this.modalComponent.showModal(
+            this.selectedMedicoId,
+            null,
+            this.selectedMedico.valorConsulta,
+            this.selectedMedico.valorRetorno,
+            this.availableDate || new Date(),
+            e
+        );
+    }
+
+    checkAvailableDate(date: any) {
+        this.availableDate = date;
+        console.log(date)
     }
 
     getMedicos() {

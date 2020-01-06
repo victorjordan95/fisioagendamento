@@ -18,6 +18,7 @@ export class ModalMedicosComponent implements OnInit {
     public medico: Medico;
     public isEditing = false;
     private DEFAULT_PASSWORD = 'novofisio';
+    public newVar: any;
 
     constructor(private afAuth: AngularFireAuth, private toastr: ToastrService, private angularFire: AngularFireDatabase) {
         this.medico = new Medico;

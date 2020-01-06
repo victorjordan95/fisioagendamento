@@ -57,10 +57,27 @@ export class CriarEventoComponent implements OnInit {
         this.getPacientes();
     }
 
-    showModal(medicoId: string, event?: any, valorConsulta?: number, valorRetorno?: number): void {
+    showModal(medicoId: string, event?: any, valorConsulta?: number, valorRetorno?: number, date?: any, time?: String): void {
+        
+        console.log(date);
+        console.log(time);
+
         this.medicoId = medicoId;
         this.valorConsulta = valorConsulta;
         this.valorRetorno = valorRetorno;
+
+        if (date) {
+            this.isNew = true;
+            this.agendamento.allDay = true;
+            this.agendamento.repeatEvent = false;
+            const x = new Date();
+            this.agendamento.id = `${x.getDate()}${x.getMonth() + 1}${x.getUTCFullYear()}` +
+                `${x.getHours()}${x.getMinutes()}${x.getSeconds()}${x.getMilliseconds()}`;
+            this.isViewMode = false;
+            this.agendamento.startDate = date;
+            this.agendamento.startHour = time;
+        }
+
         if (event) {
             this.pacienteId = event[0].pacienteId;
             this.isNew = false;
@@ -117,7 +134,7 @@ export class CriarEventoComponent implements OnInit {
 
     _checkDateAndSave(event: Agendamento) {
         this.canSave = true;
-        const currentDay = this.events.filter((el: Agendamento) => el.startDate === event.startDate);
+        const currentDay = this.events.filter((el: Agendamento) => el.start.split('T')[0] === event.start.split('T')[0]);
 
         if (!currentDay.length) {
             this.canSave = true;
