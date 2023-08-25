@@ -28,7 +28,7 @@
     "angular2-fullcalendar": "^1.0.19",
     "angularfire2": "^5.0.0-rc.10",
     "ap-angular2-fullcalendar": "^1.6.4",
-    "bootstrap": "4.0.0-beta",
+    "bootstrap": "4.0.0-beta.2",
     "core-js": "^2.5.4",
     "firebase": "^5.5.8",
     "firebase-functions": "^2.1.0",
